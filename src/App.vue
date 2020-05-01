@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <h1>{{pointerx}} , {{pointery}}</h1>
     <div id="mous" style="position: relative; background: white; width: 1000px; height: 600px; margin-left: auto; margin-right: auto;">
-      <div v-for="(val, ind) in dots" :key="ind" style="width:50px; height: 50px; border-radius: 50%; position: absolute" :class="val.z>0 ? 'hoverable': ''"
+      <div v-for="(val, ind) in dots" :key="ind" style="width:50px; height: 50px; border-radius: 50%; position: absolute" :class="(val.z>0 && ind!=0) ? 'hoverable': ''"
       :style="{bottom: val.y + 'px', left: val.x + 'px' ,transform: 'scale(' + (val.z+1) + ')', background: 'rgb('+val.r+','+val.g+','+val.b+')'}">
         <p>{{ind}}</p>
       </div>
@@ -26,6 +26,7 @@ export default {
       offsetTop: 1000,
       offsetLeft: 1000,
 
+      updateTime: 30,
 
       dots: [
         {
@@ -52,9 +53,9 @@ export default {
   },
   methods: {
     someMethod(){
-        this.dots[0].x = this.pointerx - 188
+        this.dots[0].x = this.pointerx
         this.dots[0].y = window.outerHeight - this.pointery - 158
-      if (!(this.pointerx > 370 && this.pointerx < 1000 && this.pointery > 270 && this.pointery < 900)){
+      if (!(this.pointerx > 0 && this.pointerx < 951 && this.pointery > 300 && this.pointery < 800)){
         this.dots[0].r = 0
         this.dots[0].g = 255
       }
@@ -63,18 +64,18 @@ export default {
         this.dots[0].g = 0
         this.rotate()
       }
-      setTimeout(() => this.someMethod(), 30)
+      setTimeout(() => this.someMethod(), this.updateTime)
     },
     updateValues(event) {
       
       // this.pointerx = event.screenX
       // this.pointery = event.screenY
-      this.pointerx = event.pageX-this.offsetLeft
+      this.pointerx = event.pageX - 574
       this.pointery = event.pageY  
     },
     rotate() {
-        var pitch = (this.pointerx-685)/(630*2)
-        var roll =  (this.pointery-585)/(630*2)
+        var pitch = (this.pointerx-523)/(630*2)
+        var roll =  (this.pointery-588)/(630*2)
         var yaw = 0
         var cosa = Math.cos(yaw);
         var sina = Math.sin(yaw);
@@ -142,7 +143,7 @@ export default {
   mounted(){
     var temp = {}
     var rando = {}
-    for(var i=0; i < 10; i++){
+    for(var i=0; i < 50; i++){
       temp = {}
       temp.name = this.makeid
       rando = this.randomXYZ()
@@ -191,5 +192,6 @@ export default {
 .hoverable:hover {
   background: green !important;
   border: dotted;
+  color: white;
 }
 </style>
