@@ -1,8 +1,8 @@
 <template>
-  <div id="app" >
+  <div id="app" @mousemove="updateValues($event)" >
     <img alt="Vue logo" src="./assets/logo.png">
     <h1>{{pointerx}} , {{pointery}}</h1>
-    <div id="mous" @mousemove="updateValues($event)" style="position: relative; background: white; width: 1000px; height: 600px; margin-left: auto; margin-right: auto;">
+    <div id="mous" style="position: relative; background: white; width: 1000px; height: 600px; margin-left: auto; margin-right: auto;">
       <div v-for="(val, ind) in dots" :key="ind" style="width:10px; height: 10px; border-radius: 50%; position: absolute" 
       :style="{bottom: val.y + 'px', left: val.x + 'px' ,transform: 'scale(' + (val.z+1) + ')', background: 'rgb('+val.r+','+val.g+','+val.b+')'}">
 
@@ -21,6 +21,10 @@ export default {
       pointery: 0,
       mappedx: 0,
       mappedy: 50,
+      height: 1000,
+      width: 1000,
+      offsetTop: 1000,
+      offsetLeft: 1000,
 
 
       dots: [
@@ -50,7 +54,7 @@ export default {
     someMethod(){
         this.dots[0].x = this.pointerx - 188
         this.dots[0].y = window.outerHeight - this.pointery - 158
-      if (!(this.pointerx > 570 && this.pointerx < 800 && this.pointery > 470 && this.pointery < 700)){
+      if (!(this.pointerx > 370 && this.pointerx < 1000 && this.pointery > 270 && this.pointery < 900)){
         this.dots[0].r = 0
         this.dots[0].g = 255
       }
@@ -65,12 +69,12 @@ export default {
       
       // this.pointerx = event.screenX
       // this.pointery = event.screenY
-      this.pointerx = event.clientX
-      this.pointery = event.clientY
+      this.pointerx = event.pageX-this.offsetLeft
+      this.pointery = event.pageY  
     },
     rotate() {
-        var pitch = (this.pointerx-685)/(230*2)
-        var roll =  (this.pointery-585)/(230*2)
+        var pitch = (this.pointerx-685)/(630*2)
+        var roll =  (this.pointery-585)/(630*2)
         var yaw = 0
         var cosa = Math.cos(yaw);
         var sina = Math.sin(yaw);
@@ -153,6 +157,12 @@ export default {
       this.dots.push(temp)
     }
     setTimeout(() => this.someMethod(), 30)
+    setTimeout(() =>{
+      this.height = document.getElementById('mous').clientHeight
+      this.width = document.getElementById('mous').clientWidth
+      this.offsetTop = document.getElementById('mous').offsetTop
+      this.offsetLeft = document.getElementById('mous').offsetLeft
+    }, 50)
   },
   computed: {
       
