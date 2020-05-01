@@ -2,7 +2,7 @@
   <div id="app" >
     <img alt="Vue logo" src="./assets/logo.png">
     <h1>{{pointerx}} , {{pointery}}</h1>
-    <div id="mous" @mousemove="someMethod($event)" style="position: relative; background: white; width: 1000px; height: 600px; margin-left: auto; margin-right: auto;">
+    <div id="mous" @mousemove="updateValues($event)" style="position: relative; background: white; width: 1000px; height: 600px; margin-left: auto; margin-right: auto;">
       <div v-for="(val, ind) in dots" :key="ind" style="width:10px; height: 10px; border-radius: 50%; position: absolute" 
       :style="{bottom: val.y + 'px', left: val.x + 'px' ,transform: 'scale(' + (val.z+1) + ')', background: 'rgb('+val.r+','+val.g+','+val.b+')'}">
 
@@ -21,7 +21,7 @@ export default {
       pointery: 0,
       mappedx: 0,
       mappedy: 50,
-      
+
 
       dots: [
         {
@@ -47,26 +47,30 @@ export default {
     }
   },
   methods: {
-    someMethod(event){
-      // this.pointerx = event.screenX
-      // this.pointery = event.screenY
-      this.pointerx = event.clientX
-      this.pointery = event.clientY
+    someMethod(){
         this.dots[0].x = this.pointerx - 188
         this.dots[0].y = window.outerHeight - this.pointery - 158
-      if (!(event.clientX > 570 && event.clientX < 800 && event.clientY > 470 && event.clientY < 700)){
+      if (!(this.pointerx > 570 && this.pointerx < 800 && this.pointery > 470 && this.pointery < 700)){
         this.dots[0].r = 0
         this.dots[0].g = 255
       }
       else{
         this.dots[0].r = 255
         this.dots[0].g = 0
-        this.rotate(event)
+        this.rotate()
       }
+      setTimeout(() => this.someMethod(), 30)
     },
-    rotate(event) {
-        var pitch = (event.clientX-685)/(230*10)
-        var roll =  (event.clientY-585)/(230*10)
+    updateValues(event) {
+      
+      // this.pointerx = event.screenX
+      // this.pointery = event.screenY
+      this.pointerx = event.clientX
+      this.pointery = event.clientY
+    },
+    rotate() {
+        var pitch = (this.pointerx-685)/(230*2)
+        var roll =  (this.pointery-585)/(230*2)
         var yaw = 0
         var cosa = Math.cos(yaw);
         var sina = Math.sin(yaw);
@@ -148,6 +152,7 @@ export default {
       temp.b = Math.round(Math.random()*255)
       this.dots.push(temp)
     }
+    setTimeout(() => this.someMethod(), 30)
   },
   computed: {
       
