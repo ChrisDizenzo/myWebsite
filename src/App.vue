@@ -3,9 +3,9 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <h1>{{pointerx}} , {{pointery}}</h1>
     <div id="mous" style="position: relative; background: white; width: 1000px; height: 600px; margin-left: auto; margin-right: auto;">
-      <div v-for="(val, ind) in dots" :key="ind" style="width:10px; height: 10px; border-radius: 50%; position: absolute" 
+      <div v-for="(val, ind) in dots" :key="ind" style="width:50px; height: 50px; border-radius: 50%; position: absolute" :class="val.z>0 ? 'hoverable': ''"
       :style="{bottom: val.y + 'px', left: val.x + 'px' ,transform: 'scale(' + (val.z+1) + ')', background: 'rgb('+val.r+','+val.g+','+val.b+')'}">
-
+        <p>{{ind}}</p>
       </div>
     </div>
   </div>
@@ -142,7 +142,7 @@ export default {
   mounted(){
     var temp = {}
     var rando = {}
-    for(var i=0; i < 100; i++){
+    for(var i=0; i < 10; i++){
       temp = {}
       temp.name = this.makeid
       rando = this.randomXYZ()
@@ -180,5 +180,16 @@ export default {
   width: 100vw;
   height: 100vh;
   background: gray;
+}
+
+.hoverable{
+  transition: background 0.3s;
+  border: solid; 
+  cursor: pointer;
+}
+
+.hoverable:hover {
+  background: green !important;
+  border: dotted;
 }
 </style>
