@@ -10,8 +10,8 @@
       <img :src="val.img" alt="no image">
     </div>
     <div id="mous" ref="mous" style="position: relative; background: white; width: 1000px; height: 600px; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;">
-      <div v-for="(val, ind) in dots" :key="ind" @click="displayElem(ind)" style="width:50px; height: 50px; border-radius: 50%; position: absolute" :class="(val.z>0 && ind!=0) ? 'hoverable': ''"
-      :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*10000),transform: 'scale(' + (val.z+1) + ')', background: 'rgb('+val.r+','+val.g+','+val.b+')'}">
+      <div v-for="(val, ind) in dots.slice(1,dots.length)" :key="ind" @click="displayElem(ind)" style="width:50px; height: 50px; border-radius: 50%; position: absolute" :class="(val.z>0 && ind!=0) ? 'hoverable': ''"
+      :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*10000),transform: 'scale(' + (3*val.z/4+1) + ')', background: 'rgb('+val.r+','+val.g+','+val.b+')'}">
         <p>{{ind}}</p>
       </div>
     </div>
@@ -85,6 +85,7 @@ export default {
   methods: {
     displayElem(val) {
       this.elemDisplaying = val
+      this.calcCenter()
     },
     someMethod(){
       // if (this.checking==0){
@@ -148,8 +149,8 @@ export default {
             this.dots[i].coordinate[0] = Axx*px + Axy*py + Axz*pz;
             this.dots[i].coordinate[1] = Ayx*px + Ayy*py + Ayz*pz;
             this.dots[i].coordinate[2] = Azx*px + Azy*py + Azz*pz;
-            this.dots[i].x = Math.round(this.dots[i].coordinate[0]*250+500);
-            this.dots[i].y = Math.round(this.dots[i].coordinate[1]*250+300);
+            this.dots[i].x = Math.round(this.dots[i].coordinate[0]*250+this.dots[1].x);
+            this.dots[i].y = Math.round(this.dots[i].coordinate[1]*250+this.dots[1].y);
             this.dots[i].z = this.dots[i].coordinate[2];
         }
     },
@@ -193,18 +194,10 @@ export default {
             this.dots[i].z = this.dots[i].coordinate[2];
         }
     },
-    // calcCenter(){
-    //   let x = this.$refs['mous'].clientWidth/2+this.$refs['mous'].offsetLeft
-    //   if (x != this.dots[1].absolutex){
-    //     console.log("OffsetLeft = ", this.$refs['mous'].offsetLeft," OffsetTop: ", this.$refs['mous'].offsetTop, " Setting to: " , x)
-    //     this.dots[1].absolutex = x
-    //   }
-    //   let y = this.$refs['mous'].clientHeight/2+this.$refs['mous'].offsetTop
-    //   if (y != this.dots[1].absolutey){
-    //     console.log("OffsetLeft = ", this.$refs['mous'].offsetLeft," OffsetTop: ", this.$refs['mous'].offsetTop, " Setting to: " , y)
-    //     this.dots[1].absolutey = y
-    //   }
-    // },
+    calcCenter(){
+      this.dots[1].x = this.$refs['mous'].clientWidth/2-25
+      this.dots[1].y = this.$refs['mous'].clientHeight/2-25
+    },
     smartXYZ(points) {
       var gr = (Math.sqrt(5.0)+1.0)/2.0
       var ga = (2.0 - gr)*(2.0*Math.PI)
@@ -271,6 +264,7 @@ export default {
     var rando = {}
     // console.log("here")
     var points = this.smartXYZ(40)
+    this.calcCenter()
     for(var i=0; i < 40; i++){
       temp = {}
       temp.name = this.makeid
@@ -286,8 +280,6 @@ export default {
       temp.b = Math.round(Math.random()*255)
       this.dots.push(temp)
     }
-    this.dots[1].x = this.$refs['mous'].clientWidth/2
-    this.dots[1].y = this.$refs['mous'].clientHeight/2
     setTimeout(() => this.someMethod(), 30)
     setTimeout(() =>{
       this.height = document.getElementById('mous').clientHeight
