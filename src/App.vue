@@ -4,23 +4,32 @@
     <!-- <h1>{{dots[0].x}} , {{dots[0].y}}</h1> -->
     <!-- <h1>{{dots[1].x}} , {{dots[1].y}}</h1> -->
     <!-- <h1>{{lastpitch}} , {{lastroll}}</h1> -->
+    
+    <div id="mous" ref="mous" style="position: relative; width: 600px; height: 600px; background: transparent; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;">
+      <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="hoverable"
+      :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*10000), transform: 'scale(' + (3*val.z/4+1) + ')'}">
+        
+        <!-- <p v-if="projects[ind].images" class="spheretext" style="font-size: 1rem; cursor: pointer; font-weight: 800;" :class="(val.z>0) ? 'hoverable': ''">{{val.name}}</p> -->
+        <!-- <img v-bind:src="'./assets/' + 'ME.png'" alt="no image" style="font-size: 1rem; cursor: pointer; font-weight: 800; transform: scale(.1)"> -->
+        <!-- <p v-if="!val.images" class="spheretext" style="font-size: 1rem; cursor: pointer; font-weight: 800;" :class="(val.z>0) ? 'hoverable': ''">{{val.name}}</p> -->
+        <!-- <img v-if="val.images" :src="'./assets/realAppeal.png'" style="width: 50px; height: 50px" alt=""> -->
+        <!-- <img alt="Vue logo" src="./assets/ME.png" style="transform: scale(.1)"> -->
+        <img v-bind:src="require('./assets/' + projects[ind].images[0])" style="border-radius: 15px; height: 60px; width: 100px; padding: 10px;"/>
+
+      </div>
+    </div>
     <div v-for="(val,ind) in projects" :key="ind" v-show="ind==elemDisplaying">
       <h1>{{val.title}}</h1>
-      <h1>{{val.desc}}</h1>
-      <img :src="val.img" alt="no image">
-    </div>
-    <div id="mous" ref="mous" style="position: relative; background: white; width: 1000px; height: 600px; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;">
-      <div v-for="(val, ind) in dots.slice(1,dots.length)" :key="ind" @click="displayElem(ind)" style="width:50px; height: 50px; border-radius: 50%; position: absolute" :class="(val.z>0 && ind!=0) ? 'hoverable': ''"
-      :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*10000),transform: 'scale(' + (3*val.z/4+1) + ')', background: 'rgb('+val.r+','+val.g+','+val.b+')'}">
-        <p>{{ind}}</p>
-      </div>
+      <h1>{{val.description}}</h1>
+      <h1>{{ val.images[ind] }} </h1>
+      <!-- <img v-bind:src="require('./assets/' + val.images[ind])"  alt='no image'/> -->
     </div>
     <img alt="Vue logo" src="./assets/ME.png">
   </div>
 </template>
 
 <script>
-
+import projectsJSON from './assets/data/projects.json'
 export default {
   name: 'App',
   data: function () {
@@ -35,33 +44,48 @@ export default {
       offsetTop: 1000,
       offsetLeft: 1000,
       elemDisplaying: -1,
-      lastpitch: 0,
-      lastroll: 0,
+      lastpitch: 1/4,
+      lastroll: -2,
       speedratio: 1/5,
-      slowratio: 1/16,
+      speedNumber: 5,
+      slowratio: 1/20,
+      slowestSpeed: .003,
+      sphereLoad: false,
+      sphereLoadTime: 10,
+      sphereTime: 0,
+      sphereRadius: 20,
+      sphereMaxRadius: 250,
 
-      projects: [
-        {
-          title: 'Hubub', 
-          desc: 'This was my first major iOS app that deployed to the App Store'
-        },
-        {
-          title: 'webcam ML', 
-          desc: 'This was Machine Learning project that tracks my hand'
-        },
-        {
-          title: 'realAppeal', 
-          desc: 'This was a website I developed in Vue',
-          img: 'https://static.wixstatic.com/media/d3cd5a_9edfed9ee4b641ca9dfff6a371963886~mv2.png/v1/fill/w_50,h_34,al_c,q_85,usm_0.66_1.00_0.01/realAppeal_icon.webp',
-        }
-      ],
+      bezier: {
+        p0: 0,
+        p1: .3,
+        p2: 1.5,
+        p3: 1,
+      },
+
+      // projects: [
+      //   {
+      //     title: 'Hubub', 
+      //     desc: 'This was my first major iOS app that deployed to the App Store'
+      //   },
+      //   {
+      //     title: 'webcam ML', 
+      //     desc: 'This was Machine Learning project that tracks my hand'
+      //   },
+      //   {
+      //     title: 'realAppeal', 
+      //     desc: 'This was a website I developed in Vue',
+      //     img: 'https://static.wixstatic.com/media/d3cd5a_9edfed9ee4b641ca9dfff6a371963886~mv2.png/v1/fill/w_50,h_34,al_c,q_85,usm_0.66_1.00_0.01/realAppeal_icon.webp',
+      //   }
+      // ],
+      projects: [],
       updateTime: 30,
 
       dots: [
         {
         name: 'Chris',
-        x: 50,
-        y: 40,
+        x: 0,
+        y: 0,
         z: -0.5,
         r: 0,
         g: 255,
@@ -84,6 +108,8 @@ export default {
   },
   methods: {
     displayElem(val) {
+      console.log(val)
+      console.log(this.projects[val])
       this.elemDisplaying = val
       this.calcCenter()
     },
@@ -105,6 +131,14 @@ export default {
       }
       setTimeout(() => this.someMethod(), this.updateTime)
     },
+    stepFunction(number){
+
+      if (number < this.slowestSpeed){
+        return this.slowestSpeed
+      }
+
+
+    },
     updateValues(event) {
       
       // this.pointerx = event.screenX
@@ -117,6 +151,10 @@ export default {
     },SlowRotate() {
         var pitch = this.lastpitch*(1-this.slowratio)
         var roll =  this.lastroll*(1-this.slowratio)
+        if (Math.sqrt(Math.pow(this.lastpitch,2) + Math.pow(this.lastroll,2)) < this.slowestSpeed){
+          pitch = this.lastpitch
+          roll = this.lastroll
+        }
         var yaw = 0
         this.lastpitch = pitch
         this.lastroll = roll
@@ -149,14 +187,14 @@ export default {
             this.dots[i].coordinate[0] = Axx*px + Axy*py + Axz*pz;
             this.dots[i].coordinate[1] = Ayx*px + Ayy*py + Ayz*pz;
             this.dots[i].coordinate[2] = Azx*px + Azy*py + Azz*pz;
-            this.dots[i].x = Math.round(this.dots[i].coordinate[0]*250+this.dots[1].x);
-            this.dots[i].y = Math.round(this.dots[i].coordinate[1]*250+this.dots[1].y);
-            this.dots[i].z = this.dots[i].coordinate[2];
+            this.dots[i].x = Math.round(this.dots[i].coordinate[0]*this.sphereRadius+this.dots[1].x);
+            this.dots[i].y = Math.round(this.dots[i].coordinate[1]*this.sphereRadius+this.dots[1].y);
+            this.dots[i].z = this.dots[i].coordinate[2]*this.sphereRadius/this.sphereMaxRadius;
         }
     },
     rotate() {
-        var pitch = (this.dots[0].x-this.dots[1].x)/(this.$refs['mous'].clientWidth*4)*this.speedratio + (1-this.speedratio)*this.lastpitch
-        var roll =  -1*(this.dots[0].y-this.dots[1].y)/(this.$refs['mous'].clientHeight*4)*this.speedratio+ (1-this.speedratio)*this.lastroll
+        var pitch = -1*(this.dots[0].x-this.dots[1].x)/(this.$refs['mous'].clientWidth*this.speedNumber)*this.speedratio + (1-this.speedratio)*this.lastpitch
+        var roll =  1*(this.dots[0].y-this.dots[1].y)/(this.$refs['mous'].clientHeight*this.speedNumber)*this.speedratio+ (1-this.speedratio)*this.lastroll
         var yaw = 0
         this.lastpitch = pitch
         this.lastroll = roll
@@ -189,14 +227,31 @@ export default {
             this.dots[i].coordinate[0] = Axx*px + Axy*py + Axz*pz;
             this.dots[i].coordinate[1] = Ayx*px + Ayy*py + Ayz*pz;
             this.dots[i].coordinate[2] = Azx*px + Azy*py + Azz*pz;
-            this.dots[i].x = Math.round(this.dots[i].coordinate[0]*250+this.dots[1].x);
-            this.dots[i].y = Math.round(this.dots[i].coordinate[1]*250+this.dots[1].y);
-            this.dots[i].z = this.dots[i].coordinate[2];
+            this.dots[i].x = Math.round(this.dots[i].coordinate[0]*this.sphereRadius+this.dots[1].x);
+            this.dots[i].y = Math.round(this.dots[i].coordinate[1]*this.sphereRadius+this.dots[1].y);
+            this.dots[i].z = this.dots[i].coordinate[2]*this.sphereRadius/this.sphereMaxRadius;
         }
     },
     calcCenter(){
+      this.dots[0].x = this.$refs['mous'].clientWidth/2-25
+      this.dots[0].y = this.$refs['mous'].clientHeight/2-25-5
       this.dots[1].x = this.$refs['mous'].clientWidth/2-25
       this.dots[1].y = this.$refs['mous'].clientHeight/2-25
+    },
+    bezierFunc(t) {
+      let hold = 1-t
+      return Math.pow(hold,3)*this.bezier.p0 + 3*Math.pow(hold,2)*t*this.bezier.p1 + 3*hold*Math.pow(t,2)*this.bezier.p2 + Math.pow(t,3)*this.bezier.p3
+    },
+    updateRadius(){
+      if (this.sphereTime < this.sphereMaxRadius-20){
+        this.sphereTime += 3
+        this.sphereRadius = this.bezierFunc(this.sphereTime/this.sphereMaxRadius)*this.sphereMaxRadius
+        setTimeout(() => this.updateRadius() , this.sphereLoadTime)
+      }else if (this.sphereTime < this.sphereMaxRadius){
+        this.sphereTime += 1
+        this.sphereRadius = this.bezierFunc(this.sphereTime/this.sphereMaxRadius)*this.sphereMaxRadius
+        setTimeout(() => this.updateRadius() , this.sphereLoadTime)
+      }
     },
     smartXYZ(points) {
       var gr = (Math.sqrt(5.0)+1.0)/2.0
@@ -260,14 +315,23 @@ export default {
     },
   },
   mounted(){
+    console.log(projectsJSON)
+    console.log(Object.keys(projectsJSON).length)
     var temp = {}
     var rando = {}
     // console.log("here")
-    var points = this.smartXYZ(40)
+    
+    
+    var points = this.smartXYZ(Object.keys(projectsJSON).length)
     this.calcCenter()
-    for(var i=0; i < 40; i++){
+    var project = {}
+    for(var i=0; i < Object.keys(projectsJSON).length; i++){
+      project = {}
+      project = projectsJSON[Object.keys(projectsJSON)[i]]
+      project.title = Object.keys(projectsJSON)[i]
+      this.projects.push(project)
       temp = {}
-      temp.name = this.makeid
+      temp.name = Object.keys(projectsJSON)[i]
       // rando = this.randomAxisXYZ()
       rando = points[i]
       
@@ -281,6 +345,8 @@ export default {
       this.dots.push(temp)
     }
     setTimeout(() => this.someMethod(), 30)
+    setTimeout(() => this.sphereLoad = true, this.sphereLoadTime)
+    setTimeout(() => this.updateRadius() , this.sphereLoadTime)
     setTimeout(() =>{
       this.height = document.getElementById('mous').clientHeight
       this.width = document.getElementById('mous').clientWidth
@@ -301,20 +367,40 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  width: 100vw;
-  height: 100vh;
-  background: gray;
+  overflow-y: hidden;
+  background: rgb(12, 12, 12);
+  font-family: 'Roboto', sans-serif;
+}
+
+.sphereBox{
+  width: 0px;
+  height: 0px;
+}
+
+.sphereBoxFull {
+  width: 600px;
+  height: 600px;
+}
+
+.spheretext {
+  color: rgb(224, 224, 224);
+  transition: background 0.3s;
+  transition: color 0.3s;
+
+
 }
 
 .hoverable{
-  transition: background 0.3s;
-  border: solid; 
   cursor: pointer;
+  transition: background 1s;
+  background: radial-gradient(#ffffff00, #ffffff00)  !important;
+
 }
 
 .hoverable:hover {
-  background: green !important;
-  border: dotted;
-  color: white;
+  text-decoration:  underline;
+  background: radial-gradient(#ffffff80, #ffffff00) !important; 
+
+
 }
 </style>

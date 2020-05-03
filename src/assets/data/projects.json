@@ -1,0 +1,44 @@
+{
+    "Hubbub":{
+        "titleL": "Startup - Event Discovery Platform",
+        "tags":["Frontend Development", "Backend Development", "Data Science", "iOS Development"],
+        "description": [ "Modeled the team’s first full intake, engine, and exhaust wave simulation in Ricardo WAVE.", "Presented wave simulation data to design leads, including optimal valve intake and exhaust timings.", "Designed and manufactured a portable laser alignment system, decreasing alignment time by 50%."],
+        "images": ["realAppeal.png","otherImage.jpg"],
+        "link" : ""
+    },
+    "Gator Motorsports":{
+        "titleL": "Formula Society of Automotive Engineers Competition team",
+        "tags":["Data Science", "Mechanical Engineering"],
+        "description": ["Modeled the team’s first full intake, engine, and exhaust wave simulation in Ricardo WAVE.", "Presented wave simulation data to design leads, including optimal valve intake and exhaust timings.", "Designed and manufactured a portable laser alignment system, decreasing alignment time by 50%."],
+        "images": ["realAppeal.png","otherImage.jpg"],
+        "link" : ""
+    },
+    "UF Research":{
+        "titleL": "University of Florida - Research/Individual Study",
+        "tags":["Data Science", "Machine Learning"],
+        "description": [ "Applied featurization and a ResNet-101 Neural Network to detect explosive hazards from a Markov Ground Region Segmentation System.", "Developed object-detection algorithms including R-CNN, Faster R-CNN, and YOLO.", "Created a real-time hand-tracking system, using YOLOv3 on a handmade dataset, capable of detecting positions and gestures of a hand at speeds over 60 frames per second."],
+        "images": ["realAppeal.png","otherImage.jpg"],
+        "link" : ""
+    },
+    "realAppeal":{
+        "titleL": "Startup - Event Discovery Platform",
+        "tags":["Frontend Development", "Backend Development"],
+        "description": [ "Description"],
+        "images": ["realAppeal.png","otherImage.jpg"],
+        "link" : ""
+    },
+    "Ultrasound App": {
+        "titleL": "Formula Society of Automotive Engineers Competition team",
+        "tags":["iOS Development", "Frontend Development"],
+        "description": ["An iOS application made for the University of Miami Emergency Residency program at Jackson Memorial Hospital in Miami, FL"],
+        "images": ["realAppeal.png","otherImage.jpg"],
+        "link" : ""
+    },
+    "WebcamML":{
+        "titleL": "Realtime Hand Recognition System",
+        "tags":["Frontend Development", "Backend Development", "Machine Learning", "Data Science"],
+        "description":["A website to collect data for labeled hand images.", "Data pipelining and manipulation to increase robustness", "Created realtime hand recognition system using YOLOv3 architecture."],
+        "images": ["realAppeal.png","otherImage.jpg"],
+        "link" : ""
+    }
+}
