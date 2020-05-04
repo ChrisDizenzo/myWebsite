@@ -85,8 +85,8 @@ export default {
       offsetTop: 1000,
       offsetLeft: 1000,
       elemDisplaying: -1,
-      lastpitch: 1/4,
-      lastroll: -2,
+      lastpitch: 1/16,
+      lastroll: -1/4,
       speedratio: 1/5,
       speedNumber: 5,
       slowratio: 1/20,
@@ -125,8 +125,8 @@ export default {
       dots: [
         {
         name: 'Chris',
-        x: 0,
-        y: 0,
+        x: -100,
+        y: -100,
         z: -0.5,
         r: 0,
         g: 255,
@@ -272,8 +272,8 @@ export default {
         }
     },
     calcCenter(){
-      this.dots[0].x = this.$refs['mous'].clientWidth/2-25
-      this.dots[0].y = this.$refs['mous'].clientHeight/2-25-5
+      this.dots[0].x = this.$refs['mous'].clientWidth/2-25-500
+      this.dots[0].y = this.$refs['mous'].clientHeight/2-25-500
       this.dots[1].x = this.$refs['mous'].clientWidth/2-25
       this.dots[1].y = this.$refs['mous'].clientHeight/2-25
     },
