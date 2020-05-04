@@ -214,20 +214,8 @@ export default {
     displayElem(val) {
       if(this.elemDisplaying != val) {
         this.elemDisplaying = val
-        console.log(val)
-        console.log(this.dots[this.elemDisplaying+2].name)
-        console.log(this.dots[this.elemDisplaying+2].coordinate)
-      } else {
-        console.log("rotate again")
-        setTimeout(() => this.rotate(), 30)
-        setTimeout(() => this.sphereLoad = true, this.sphereLoadTime)
-        setTimeout(() => this.updateRadius() , this.sphereLoadTime)
-        setTimeout(() =>{
-          this.height = document.getElementById('mous').clientHeight
-          this.width = document.getElementById('mous').clientWidth
-          this.offsetTop = document.getElementById('mous').offsetTop
-          this.offsetLeft = document.getElementById('mous').offsetLeft
-        }, 50)
+      }else{
+        this.elemDisplaying = -1
       }
       
     },
