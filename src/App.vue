@@ -22,26 +22,11 @@
     <!-- <h1>{{dots[1].x}} , {{dots[1].y}}</h1> -->
     <!-- <h1>{{lastpitch}} , {{lastroll}}</h1> -->
     <div class="h-screen w-full -mt-16 pointer-events-none">
-      <div class="flex w-full h-screen items-center">
-        <div v-if="elemDisplaying!=-1" class="w-1/2 flex items-baseline justify-between text-white">
-          <div v-for="(val,ind) in projects" :key="ind" v-show="ind==elemDisplaying">
-            <p class="text-6xl w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 6rem">{{val.title}}</p>
-            <ul class="list-inside" style="list-style-position: inside">
-              <li v-for="(desc, ind) in val.description" :key="ind" >{{desc}}</li>
-            </ul>
-            
-            <h1>{{ val.images[ind] }} </h1>
-            <!-- <img v-bind:src="require('./assets/' + val.images[ind])"  alt='no image'/> -->
-          </div>
-        </div>
-        <div v-if="elemDisplaying==-1" class="w-1/2 flex flex-col justify-center pl-10 pr-8 pointer-events-auto">
-          <div class="flex items-center w-full mb-1">
-            <vue-typed-js :strings="['Hello,^300 \n I\'m Chris!']" :showCursor="false" @onComplete="hideCursor" :typeSpeed="45">
-              <p class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 5rem"> <span class="typing"></span> </p>
-            </vue-typed-js>
-            <div class="w-2 hoverable" :class="cursorShow? 'bg-white' : 'bg-black'" style="height: 5rem;">
-            </div>
-          </div>
+      <div class="flex w-full h-screen justify-end items-center relative">
+        <div class="absolute w-1/2 flex justify-center " style="top:25%; left:0px; ">
+          <div v-if="elemDisplaying==-1" class="px-2 flex flex-col items-start pointer-events-auto" style="width:90%">
+          <TitleTypeVue :msg="['Hello,']" :sDelay="500" :cDelay="5" />
+          <TitleTypeVue :msg="['I\'m Chris!']" :sDelay="1500" :cDelay="400" :typeFade="true"/>
           
 
 
@@ -79,13 +64,27 @@
           
           <p data-aos="fade-left"
     data-aos-offset="200"
-    data-aos-delay="3000"
+    data-aos-delay="2500"
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
     data-aos-once="true" class="text-xl w-full font-normal text-white leading-tight">Let's make something awesome together.</p>
 
           
+        </div>
+        </div>
+        
+        <div v-if="elemDisplaying!=-1" class="w-3/4 flex items-baseline justify-between text-white">
+        
+          <div v-for="(val,ind) in projects" :key="ind" v-show="elemDisplaying==ind">
+            <p class="text-6xl w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 6rem">{{val.title}}</p>
+            <ul class="list-inside" style="list-style-position: inside">
+              <li v-for="(desc, ind) in val.description" :key="ind" >{{desc}}</li>
+            </ul>
+            
+            <h1>{{ val.images[ind] }} </h1>
+            <!-- <img v-bind:src="require('./assets/' + val.images[ind])"  alt='no image'/> -->
+          </div>
         </div>
         <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden">
 
@@ -130,8 +129,12 @@
 
 <script>
 import projectsJSON from './assets/data/projects.json'
+import TitleTypeVue from './components/TItleTypeVue'
 export default {
   name: 'App',
+  components: {
+    TitleTypeVue,
+  },
   data: function () {
     return {
       cursorShow : true,
