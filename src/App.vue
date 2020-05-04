@@ -103,7 +103,6 @@
           </div>
 
         </div>
-
       </div>
     </div>
 
@@ -114,26 +113,19 @@
 
     </div>
     
-    <div class="h-screen bg-white w-full z-10 flex flex-col items-center">
-      <div class="container flex flex-col items-center">
-        <p class="text-6xl w-full text-bold text-gray-900 text-center leading-tight" style="font-weight: 700; font-size: 8rem">About me</p>
-        
-        <img alt="Vue logo" src="./assets/ME.png">
-
-      </div>
-
-    </div>
-    
+    <About />
   </div>
 </template>
 
 <script>
 import projectsJSON from './assets/data/projects.json'
 import TitleTypeVue from './components/TItleTypeVue'
+import About from './components/About'
 export default {
   name: 'App',
   components: {
     TitleTypeVue,
+    About
   },
   data: function () {
     return {
