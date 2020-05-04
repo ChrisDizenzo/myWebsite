@@ -1,13 +1,19 @@
 <template>
-  <div id="app" class="font-sans" ref="app" @mousemove="updateValues($event)" >
+  <div id="app" class="font-sans flex flex-col" ref="app" @mousemove="updateValues($event)" >
     <div class="h-screen w-full flex flex-col ">
       <div class="w-full flex justify-center items-center  py-3">
-        <div  class="container flex items-baseline justify-between">
-          <p class="text-xl opacity-50 font-medium cursor-pointer text-white hover:opacity-100">Chris DiZenzo</p>
+        <div data-aos="fade-down"
+    data-aos-offset="0"
+    data-aos-delay="0"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true" class="container flex items-baseline text-white justify-between">
+          <p class="text-xl opacity-75 font-medium cursor-pointer hover:opacity-100">Chris DiZenzo</p>
           <div class="flex items-baseline">
-            <p class="text-lg opacity-50 font-medium cursor-pointer text-white hover:opacity-100 rounded py-2 px-4 mx-8">About</p>
-            <p class="text-lg opacity-50 font-medium cursor-pointer text-white hover:opacity-100 rounded py-2 px-4 mx-8">Resume</p>
-            <p class="text-lg opacity-50 font-medium cursor-pointer text-white hover:opacity-100 rounded  py-2 px-4 mx-8">Contact</p>
+            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8">About</p>
+            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8">Resume</p>
+            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded  py-2 px-4 mx-8">Contact</p>
             
           </div>
         </div>
@@ -28,18 +34,66 @@
             <!-- <img v-bind:src="require('./assets/' + val.images[ind])"  alt='no image'/> -->
           </div>
         </div>
-        <div v-if="elemDisplaying==-1" class="w-1/2 flex flex-col pointer-events-auto">
-          <p class="text-6xl w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 8rem">Chris</p>
+        <div v-if="elemDisplaying==-1" class="w-1/2 flex flex-col justify-center pl-10 pr-8 pointer-events-auto">
+          <p data-aos="fade-up"
+    data-aos-offset="200"
+    data-aos-delay="50"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true"
+    data-aos-anchor-placement="top-center" class="text-6xl w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 8rem">Chris</p>
 
-          <p class="text-6xl w-full text-right text-bold text-white -mt-12 leading-tight" style="font-weight: 700; font-size: 8rem">DiZenzo</p>
+          <p data-aos="fade-up"
+    data-aos-offset="200"
+    data-aos-delay="400"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true" class="text-6xl w-full text-right text-bold text-white -mt-12 leading-tight" style="font-weight: 700; font-size: 8rem">DiZenzo</p>
+          
+          <p data-aos="fade-left"
+    data-aos-offset="200"
+    data-aos-delay="1000"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true" class="text-xl w-full font-light text-white my-3 leading-tight">I'm a <span class="text-2xl">hecc</span>in good computer <b>programmer, data scientist, and mathematician.</b> </p>
+
+          <div class="flex flex-col justify-between my-3 items-baseline">
+            <p data-aos="fade-left"
+    data-aos-offset="200"
+    data-aos-delay="1500"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true" class="text-xl w-full font-light text-white leading-tight">The rules are simple:</p>
+            <p data-aos="fade-left"
+    data-aos-offset="200"
+    data-aos-delay="1600"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true" class="text-xl w-full font-light text-center text-white  leading-tight">You give me <span class="italic">pasta</span>, I give you <span class="font-medium">code.</span></p>
+          </div>
+          
+          <p data-aos="fade-left"
+    data-aos-offset="200"
+    data-aos-delay="2000"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true" class="text-xl w-full font-light text-white my-3 leading-tight">Let's make something awesome together.</p>
+
+          
         </div>
-        <div class="w-1/2 flex flex-col pointer-events-auto select-none overflow-x-hidden">
+        <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden">
 
-          <div id="mous" ref="mous" style="position: relative; width: 600px; height: 600px; background: transparent; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;">
-            <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="hoverable"
+          <div id="mous" ref="mous" class="relative w-full h-full" style="height:600px; max-width: 1000px">
+            <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="px-4 py-1" :class="elemDisplaying==ind ? ['bg-gray-800', 'text-white'] : ['text-gray-400', 'hover:text-white']"
             :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*10000), transform: 'scale(' + (3*val.z/4+1) + ')'}">
               
-              <p v-if="projects[ind].images" class="spheretext text-white text-2xl font-medium" style="cursor: pointer;" :class="(val.z>0) ? 'hoverable': ''">{{val.name}}</p>
+              <p v-if="projects[ind].images" class="spheretext text-2xl font-medium"  style="cursor: pointer;" :class="elemDisplaying==ind ? [''] : ''">{{val.name}}</p>
               <!-- <img v-bind:src="'./assets/' + 'ME.png'" alt="no image" style="font-size: 1rem; cursor: pointer; font-weight: 800; transform: scale(.1)"> -->
               <!-- <p v-if="!val.images" class="spheretext" style="font-size: 1rem; cursor: pointer; font-weight: 800;" :class="(val.z>0) ? 'hoverable': ''">{{val.name}}</p> -->
               <!-- <img v-if="val.images" :src="'./assets/realAppeal.png'" style="width: 50px; height: 50px" alt=""> -->
@@ -61,9 +115,16 @@
 
     </div>
     
+    <div class="h-screen bg-white w-full z-10 flex flex-col items-center">
+      <div class="container flex flex-col items-center">
+        <p class="text-6xl w-full text-bold text-gray-900 text-center leading-tight" style="font-weight: 700; font-size: 8rem">About me</p>
+        
+        <img alt="Vue logo" src="./assets/ME.png">
+
+      </div>
+
+    </div>
     
-    
-    <img alt="Vue logo" src="./assets/ME.png">
   </div>
 </template>
 
@@ -151,13 +212,24 @@ export default {
   },
   methods: {
     displayElem(val) {
-      this.elemDisplaying = val
-      console.log(val)
-      console.log(this.dots[this.elemDisplaying+2].name)
-      console.log(this.dots[this.elemDisplaying+2].coordinate)
-      this.pitch = 0
-      this.roll = 0
-      this.calcCenter()
+      if(this.elemDisplaying != val) {
+        this.elemDisplaying = val
+        console.log(val)
+        console.log(this.dots[this.elemDisplaying+2].name)
+        console.log(this.dots[this.elemDisplaying+2].coordinate)
+      } else {
+        console.log("rotate again")
+        setTimeout(() => this.rotate(), 30)
+        setTimeout(() => this.sphereLoad = true, this.sphereLoadTime)
+        setTimeout(() => this.updateRadius() , this.sphereLoadTime)
+        setTimeout(() =>{
+          this.height = document.getElementById('mous').clientHeight
+          this.width = document.getElementById('mous').clientWidth
+          this.offsetTop = document.getElementById('mous').offsetTop
+          this.offsetLeft = document.getElementById('mous').offsetLeft
+        }, 50)
+      }
+      
     },
     stepFunction(number){
 
