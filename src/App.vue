@@ -1,29 +1,68 @@
 <template>
-  <div id="app" ref="app" @mousemove="updateValues($event)" >
-    <h1>My Brain:</h1>
+  <div id="app" class="font-sans" ref="app" @mousemove="updateValues($event)" >
+    <div class="h-screen w-full flex flex-col ">
+      <div class="w-full flex justify-center items-center  py-3">
+        <div  class="container flex items-baseline justify-between">
+          <p class="text-xl opacity-50 font-medium cursor-pointer text-white hover:opacity-100">Chris DiZenzo</p>
+          <div class="flex items-baseline">
+            <p class="text-lg opacity-50 font-medium cursor-pointer text-white hover:opacity-100 rounded py-2 px-4 mx-8">About</p>
+            <p class="text-lg opacity-50 font-medium cursor-pointer text-white hover:opacity-100 rounded py-2 px-4 mx-8">Resume</p>
+            <p class="text-lg opacity-50 font-medium cursor-pointer text-white hover:opacity-100 rounded  py-2 px-4 mx-8">Contact</p>
+            
+          </div>
+        </div>
+      </div>
     <!-- <h1>{{dots[0].x}} , {{dots[0].y}}</h1> -->
     <!-- <h1>{{dots[1].x}} , {{dots[1].y}}</h1> -->
     <!-- <h1>{{lastpitch}} , {{lastroll}}</h1> -->
-    
-    <div id="mous" ref="mous" style="position: relative; width: 600px; height: 600px; background: transparent; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;">
-      <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="hoverable"
-      :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*10000), transform: 'scale(' + (3*val.z/4+1) + ')'}">
-        
-        <!-- <p v-if="projects[ind].images" class="spheretext" style="font-size: 1rem; cursor: pointer; font-weight: 800;" :class="(val.z>0) ? 'hoverable': ''">{{val.name}}</p> -->
-        <!-- <img v-bind:src="'./assets/' + 'ME.png'" alt="no image" style="font-size: 1rem; cursor: pointer; font-weight: 800; transform: scale(.1)"> -->
-        <!-- <p v-if="!val.images" class="spheretext" style="font-size: 1rem; cursor: pointer; font-weight: 800;" :class="(val.z>0) ? 'hoverable': ''">{{val.name}}</p> -->
-        <!-- <img v-if="val.images" :src="'./assets/realAppeal.png'" style="width: 50px; height: 50px" alt=""> -->
-        <!-- <img alt="Vue logo" src="./assets/ME.png" style="transform: scale(.1)"> -->
-        <img v-bind:src="require('./assets/' + projects[ind].images[0])" style="border-radius: 15px; height: 60px; width: 100px; padding: 10px;"/>
+    <div class="h-screen w-full -mt-16 pointer-events-none">
+      <div class="flex w-full h-screen items-center">
+        <div v-if="elemDisplaying!=-1" class="w-1/2 flex items-baseline justify-between text-white">
+          <div v-for="(val,ind) in projects" :key="ind" v-show="ind==elemDisplaying">
+            <p class="text-6xl w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 6rem">{{val.title}}</p>
+            <ul class="list-inside" style="list-style-position: inside">
+              <li v-for="(desc, ind) in val.description" :key="ind" >{{desc}}</li>
+            </ul>
+            
+            <h1>{{ val.images[ind] }} </h1>
+            <!-- <img v-bind:src="require('./assets/' + val.images[ind])"  alt='no image'/> -->
+          </div>
+        </div>
+        <div v-if="elemDisplaying==-1" class="w-1/2 flex flex-col pointer-events-auto">
+          <p class="text-6xl w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 8rem">Chris</p>
+
+          <p class="text-6xl w-full text-right text-bold text-white -mt-12 leading-tight" style="font-weight: 700; font-size: 8rem">DiZenzo</p>
+        </div>
+        <div class="w-1/2 flex flex-col pointer-events-auto select-none overflow-x-hidden">
+
+          <div id="mous" ref="mous" style="position: relative; width: 600px; height: 600px; background: transparent; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;">
+            <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="hoverable"
+            :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*10000), transform: 'scale(' + (3*val.z/4+1) + ')'}">
+              
+              <p v-if="projects[ind].images" class="spheretext text-white text-2xl font-medium" style="cursor: pointer;" :class="(val.z>0) ? 'hoverable': ''">{{val.name}}</p>
+              <!-- <img v-bind:src="'./assets/' + 'ME.png'" alt="no image" style="font-size: 1rem; cursor: pointer; font-weight: 800; transform: scale(.1)"> -->
+              <!-- <p v-if="!val.images" class="spheretext" style="font-size: 1rem; cursor: pointer; font-weight: 800;" :class="(val.z>0) ? 'hoverable': ''">{{val.name}}</p> -->
+              <!-- <img v-if="val.images" :src="'./assets/realAppeal.png'" style="width: 50px; height: 50px" alt=""> -->
+              <!-- <img alt="Vue logo" src="./assets/ME.png" style="transform: scale(.1)"> -->
+              <!-- <img v-bind:src="require('./assets/' + projects[ind].images[0])" style="border-radius: 15px; height: 60px; width: 100px; padding: 10px;"/> -->
+
+            </div>
+          </div>
+
+        </div>
 
       </div>
     </div>
-    <div v-for="(val,ind) in projects" :key="ind" v-show="ind==elemDisplaying">
-      <h1>{{val.title}}</h1>
-      <h1>{{val.description}}</h1>
-      <h1>{{ val.images[ind] }} </h1>
-      <!-- <img v-bind:src="require('./assets/' + val.images[ind])"  alt='no image'/> -->
+
+
+    
+
+
+
     </div>
+    
+    
+    
     <img alt="Vue logo" src="./assets/ME.png">
   </div>
 </template>
@@ -34,6 +73,8 @@ export default {
   name: 'App',
   data: function () {
     return {
+
+
       pointerx: 0,
       pointery: 0,
       checking: 0,
@@ -108,8 +149,6 @@ export default {
   },
   methods: {
     displayElem(val) {
-      console.log(val)
-      console.log(this.projects[val])
       this.elemDisplaying = val
       this.calcCenter()
     },
@@ -362,14 +401,27 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  overflow-y: hidden;
-  background: rgb(12, 12, 12);
-  font-family: 'Roboto', sans-serif;
+  background: #1a1a1a;
+}
+
+#app:before {
+  content:"";
+  position:absolute;
+  z-index: 10;
+  width:100%;
+  height:100%;
+  left:0;
+  top:0;
+  z-index:-1;
+  opacity:0.9;
+  background-image: url("./assets/space.jpg");
+  background-size: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  background-position: center;
 }
 
 .sphereBox{
@@ -383,7 +435,6 @@ export default {
 }
 
 .spheretext {
-  color: rgb(224, 224, 224);
   transition: background 0.3s;
   transition: color 0.3s;
 
@@ -393,13 +444,11 @@ export default {
 .hoverable{
   cursor: pointer;
   transition: background 1s;
-  background: radial-gradient(#ffffff00, #ffffff00)  !important;
 
 }
 
 .hoverable:hover {
   text-decoration:  underline;
-  background: radial-gradient(#ffffff80, #ffffff00) !important; 
 
 
 }
