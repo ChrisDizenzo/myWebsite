@@ -195,8 +195,8 @@ export default {
         }
       }
       else{
-        pitch = -1*this.dots[this.elemDisplaying+2].coordinate[0]*this.speedratio+ (1-this.speedratio)*this.lastroll
-        roll = 1*this.dots[this.elemDisplaying+2].coordinate[1]*this.speedratio+ (1-this.speedratio)*this.lastroll
+        pitch = -1*(this.dots[this.elemDisplaying+2].x-this.dots[1].x)/(this.$refs['mous'].clientWidth*this.speedNumber)*this.speedratio + (1-this.speedratio)*this.lastpitch
+        roll =  1*(this.dots[this.elemDisplaying+2].y-this.dots[1].y)/(this.$refs['mous'].clientHeight*this.speedNumber)*this.speedratio+ (1-this.speedratio)*this.lastroll
       }
         this.lastpitch = pitch
         this.lastroll = roll

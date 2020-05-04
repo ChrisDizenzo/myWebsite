@@ -40,5 +40,12 @@
         "description":["A website to collect data for labeled hand images.", "Data pipelining and manipulation to increase robustness", "Created realtime hand recognition system using YOLOv3 architecture."],
         "images": ["realAppeal.png","otherImage.jpg"],
         "link" : ""
+    },
+    "myWebsite":{
+        "titleL": "Your Here Now!",
+        "tags":["Frontend Development", "Applied Mathmatics"],
+        "description":["The movement of the Sphere is calculated by converting the mouse position to principal axes rotations.","The distribution of the points across the sphere surface is a replication of the Spherical Fibonacci Spiral."],
+        "images": ["realAppeal.png","otherImage.jpg"],
+        "link" : ""
     }
 }
