@@ -85,12 +85,14 @@ export default {
       offsetTop: 1000,
       offsetLeft: 1000,
       elemDisplaying: -1,
+
       lastpitch: 1/16,
       lastroll: -1/4,
       speedratio: 1/5,
       speedNumber: 5,
       slowratio: 1/20,
       slowestSpeed: .003,
+
       sphereLoad: false,
       sphereLoadTime: 10,
       sphereTime: 0,
@@ -150,25 +152,12 @@ export default {
   methods: {
     displayElem(val) {
       this.elemDisplaying = val
+      console.log(val)
+      console.log(this.dots[this.elemDisplaying+2].name)
+      console.log(this.dots[this.elemDisplaying+2].coordinate)
+      this.pitch = 0
+      this.roll = 0
       this.calcCenter()
-    },
-    someMethod(){
-      // if (this.checking==0){
-      //   this.calcCenter()
-      //   this.checking=1
-      //   setTimeout(() => {this.checking=0}, 100)
-      // }
-      if (!(Math.abs(this.dots[0].x-this.dots[1].x) < this.$refs['mous'].clientWidth/2 && Math.abs(this.dots[0].y-this.dots[1].y) < this.$refs['mous'].clientHeight/2)){
-        this.dots[0].r = 0
-        this.dots[0].g = 255
-        this.SlowRotate()
-      }
-      else{
-        this.dots[0].r = 255
-        this.dots[0].g = 0
-        this.rotate()
-      }
-      setTimeout(() => this.someMethod(), this.updateTime)
     },
     stepFunction(number){
 
@@ -186,55 +175,29 @@ export default {
       this.pointery = event.pageY -10 
       this.dots[0].x = event.pageX - this.$refs['mous'].offsetLeft-20
       this.dots[0].y = event.pageY - this.$refs['mous'].offsetTop-20
-
-    },SlowRotate() {
-        var pitch = this.lastpitch*(1-this.slowratio)
-        var roll =  this.lastroll*(1-this.slowratio)
-        if (Math.sqrt(Math.pow(this.lastpitch,2) + Math.pow(this.lastroll,2)) < this.slowestSpeed){
-          pitch = this.lastpitch
-          roll = this.lastroll
-        }
-        var yaw = 0
-        this.lastpitch = pitch
-        this.lastroll = roll
-        var cosa = Math.cos(yaw);
-        var sina = Math.sin(yaw);
-
-        var cosb = Math.cos(pitch);
-        var sinb = Math.sin(pitch);
-
-        var cosc = Math.cos(roll);
-        var sinc = Math.sin(roll);
-
-        var Axx = cosa*cosb;
-        var Axy = cosa*sinb*sinc - sina*cosc;
-        var Axz = cosa*sinb*cosc + sina*sinc;
-
-        var Ayx = sina*cosb;
-        var Ayy = sina*sinb*sinc + cosa*cosc;
-        var Ayz = sina*sinb*cosc - cosa*sinc;
-
-        var Azx = -sinb;
-        var Azy = cosb*sinc;
-        var Azz = cosb*cosc;
-        // console.log("Here")
-        for (var i = 2; i < this.dots.length; i++) {
-            var px = this.dots[i].coordinate[0];
-            var py = this.dots[i].coordinate[1];
-            var pz = this.dots[i].coordinate[2];
-            
-            this.dots[i].coordinate[0] = Axx*px + Axy*py + Axz*pz;
-            this.dots[i].coordinate[1] = Ayx*px + Ayy*py + Ayz*pz;
-            this.dots[i].coordinate[2] = Azx*px + Azy*py + Azz*pz;
-            this.dots[i].x = Math.round(this.dots[i].coordinate[0]*this.sphereRadius+this.dots[1].x);
-            this.dots[i].y = Math.round(this.dots[i].coordinate[1]*this.sphereRadius+this.dots[1].y);
-            this.dots[i].z = this.dots[i].coordinate[2]*this.sphereRadius/this.sphereMaxRadius;
-        }
     },
     rotate() {
-        var pitch = -1*(this.dots[0].x-this.dots[1].x)/(this.$refs['mous'].clientWidth*this.speedNumber)*this.speedratio + (1-this.speedratio)*this.lastpitch
-        var roll =  1*(this.dots[0].y-this.dots[1].y)/(this.$refs['mous'].clientHeight*this.speedNumber)*this.speedratio+ (1-this.speedratio)*this.lastroll
-        var yaw = 0
+      var pitch = 0
+      var roll =  0
+      var yaw = 0
+      if ((this.elemDisplaying==-1)){
+        if ((Math.abs(this.dots[0].x-this.dots[1].x) < this.$refs['mous'].clientWidth/2 && Math.abs(this.dots[0].y-this.dots[1].y) < this.$refs['mous'].clientHeight/2)){
+          pitch = -1*(this.dots[0].x-this.dots[1].x)/(this.$refs['mous'].clientWidth*this.speedNumber)*this.speedratio + (1-this.speedratio)*this.lastpitch
+          roll =  1*(this.dots[0].y-this.dots[1].y)/(this.$refs['mous'].clientHeight*this.speedNumber)*this.speedratio+ (1-this.speedratio)*this.lastroll
+        }
+        else{
+          pitch = this.lastpitch*(1-this.slowratio)
+          roll =  this.lastroll*(1-this.slowratio)
+          if (Math.sqrt(Math.pow(this.lastpitch,2) + Math.pow(this.lastroll,2)) < this.slowestSpeed){
+            pitch = this.lastpitch
+            roll = this.lastroll
+          }
+        }
+      }
+      else{
+        pitch = -1*this.dots[this.elemDisplaying+2].coordinate[0]*this.speedratio+ (1-this.speedratio)*this.lastroll
+        roll = 1*this.dots[this.elemDisplaying+2].coordinate[1]*this.speedratio+ (1-this.speedratio)*this.lastroll
+      }
         this.lastpitch = pitch
         this.lastroll = roll
         var cosa = Math.cos(yaw);
@@ -270,6 +233,7 @@ export default {
             this.dots[i].y = Math.round(this.dots[i].coordinate[1]*this.sphereRadius+this.dots[1].y);
             this.dots[i].z = this.dots[i].coordinate[2]*this.sphereRadius/this.sphereMaxRadius;
         }
+      setTimeout(() => this.rotate(), this.updateTime)
     },
     calcCenter(){
       this.dots[0].x = this.$refs['mous'].clientWidth/2-25-500
@@ -383,7 +347,7 @@ export default {
       temp.b = Math.round(Math.random()*255)
       this.dots.push(temp)
     }
-    setTimeout(() => this.someMethod(), 30)
+    setTimeout(() => this.rotate(), 30)
     setTimeout(() => this.sphereLoad = true, this.sphereLoadTime)
     setTimeout(() => this.updateRadius() , this.sphereLoadTime)
     setTimeout(() =>{
