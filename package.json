@@ -11,7 +11,9 @@
     "aos": "^3.0.0-beta.6",
     "core-js": "^3.6.4",
     "tailwindcss": "^1.4.4",
-    "vue": "^2.6.11"
+    "typed.js": "^2.0.11",
+    "vue": "^2.6.11",
+    "vue-typed-js": "^0.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",

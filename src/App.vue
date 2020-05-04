@@ -35,42 +35,42 @@
           </div>
         </div>
         <div v-if="elemDisplaying==-1" class="w-1/2 flex flex-col justify-center pl-10 pr-8 pointer-events-auto">
-          <p data-aos="fade-up"
-    data-aos-offset="200"
-    data-aos-delay="50"
-    data-aos-duration="600"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="true"
-    data-aos-anchor-placement="top-center" class="text-6xl w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 8rem">Chris</p>
-
-          <p data-aos="fade-up"
-    data-aos-offset="200"
-    data-aos-delay="400"
-    data-aos-duration="600"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="true" class="text-6xl w-full text-right text-bold text-white -mt-12 leading-tight" style="font-weight: 700; font-size: 8rem">DiZenzo</p>
+          <div class="flex items-center w-full">
+            <vue-typed-js :strings="['Hello,^300 \n I\'m Chris!']" :showCursor="false" @onComplete="hideCursor" :typeSpeed="45">
+              <p class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 5rem"> <span class="typing"></span> </p>
+            </vue-typed-js>
+            <div class="w-2 hoverable" :class="cursorShow? 'bg-white' : 'bg-black'" style="height: 5rem;">
+            </div>
+          </div>
           
-          <p data-aos="fade-left"
+
+
+          <div data-aos="fade-left"
     data-aos-offset="200"
-    data-aos-delay="1000"
+    data-aos-delay="2000"
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
-    data-aos-once="true" class="text-xl w-full font-light text-white my-3 leading-tight">I'm a <span class="text-2xl">hecc</span>in good computer <b>programmer, data scientist, and mathematician.</b> </p>
+    data-aos-once="true" class="flex items-baseline justify-start">
+            <p  class="text-2xl font-light text-white my-3 leading-tight">I'm a <span class="text-2xl">hecc</span>in good:  </p>
+
+          <vue-typed-js :strings="['Programmer', 'Machine Learning Engineer', 'Data Scientist', 'Mathematician']" :typeSpeed="25" :loop="true" :backDelay="1500" :startDelay="3000"  :showCursor="true" :cursorChar="'_'" >
+            <p class="text-2xl font-light text-white my-3 leading-tight font-medium ml-8"> <span class="typing"></span> </p>
+          </vue-typed-js>
+          </div>
+          
 
           <div class="flex flex-col justify-between my-3 items-baseline">
             <p data-aos="fade-left"
     data-aos-offset="200"
-    data-aos-delay="1500"
+    data-aos-delay="2500"
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
-    data-aos-once="true" class="text-xl w-full font-light text-white leading-tight">The rules are simple:</p>
+    data-aos-once="true" class="text-2xl w-full font-light text-white leading-tight">The rules are simple:</p>
             <p data-aos="fade-left"
     data-aos-offset="200"
-    data-aos-delay="1600"
+    data-aos-delay="2600"
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
@@ -79,7 +79,7 @@
           
           <p data-aos="fade-left"
     data-aos-offset="200"
-    data-aos-delay="2000"
+    data-aos-delay="3000"
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
@@ -134,7 +134,7 @@ export default {
   name: 'App',
   data: function () {
     return {
-
+      cursorShow : true,
 
       pointerx: 0,
       pointery: 0,
@@ -211,6 +211,9 @@ export default {
     }
   },
   methods: {
+    hideCursor() {
+      setTimeout(() => this.cursorShow = false, 500)
+    },
     displayElem(val) {
       if(this.elemDisplaying != val) {
         this.elemDisplaying = val
@@ -476,4 +479,5 @@ export default {
 
 
 }
+
 </style>
