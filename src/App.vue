@@ -35,7 +35,7 @@
           </div>
         </div>
         <div v-if="elemDisplaying==-1" class="w-1/2 flex flex-col justify-center pl-10 pr-8 pointer-events-auto">
-          <div class="flex items-center w-full">
+          <div class="flex items-center w-full mb-1">
             <vue-typed-js :strings="['Hello,^300 \n I\'m Chris!']" :showCursor="false" @onComplete="hideCursor" :typeSpeed="45">
               <p class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 5rem"> <span class="typing"></span> </p>
             </vue-typed-js>
@@ -52,29 +52,29 @@
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
     data-aos-once="true" class="flex items-baseline justify-start">
-            <p  class="text-2xl font-light text-white my-3 leading-tight">I'm a <span class="text-2xl">hecc</span>in good:  </p>
+            <p  class="text-2xl font-normal text-white my-3 leading-tight">I'm a  </p>
 
-          <vue-typed-js :strings="['Programmer', 'Machine Learning Engineer', 'Data Scientist', 'Mathematician']" :typeSpeed="25" :loop="true" :backDelay="1500" :startDelay="3000"  :showCursor="true" :cursorChar="'_'" >
-            <p class="text-2xl font-light text-white my-3 leading-tight font-medium ml-8"> <span class="typing"></span> </p>
+          <vue-typed-js :strings="['Programmer', 'Machine Learning Engineer', 'Data Scientist', 'Mathematician']" :backSpeed="13" :typeSpeed="25" :loop="true" :backDelay="1500" :startDelay="2000"  :showCursor="true" :cursorChar="'|'" >
+            <p class="text-2xl font-normal text-white my-3 leading-tight font-medium ml-2"> <span class="typing"></span> </p>
           </vue-typed-js>
           </div>
           
 
-          <div class="flex flex-col justify-between my-3 items-baseline">
-            <p data-aos="fade-left"
+          <div class="flex flex-col justify-between items-baseline">
+            <!-- <p data-aos="fade-left"
     data-aos-offset="200"
     data-aos-delay="2500"
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
-    data-aos-once="true" class="text-2xl w-full font-light text-white leading-tight">The rules are simple:</p>
+    data-aos-once="true" class="text-2xl w-full font-normal text-white leading-tight">The rules are simple:</p>
             <p data-aos="fade-left"
     data-aos-offset="200"
     data-aos-delay="2600"
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
-    data-aos-once="true" class="text-xl w-full font-light text-center text-white  leading-tight">You give me <span class="italic">pasta</span>, I give you <span class="font-medium">code.</span></p>
+    data-aos-once="true" class="text-xl w-full font-light text-center text-white  leading-tight">You give me <span class="italic">pasta</span>, I give you <span class="font-medium">code.</span></p> -->
           </div>
           
           <p data-aos="fade-left"
@@ -83,7 +83,7 @@
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
-    data-aos-once="true" class="text-xl w-full font-light text-white my-3 leading-tight">Let's make something awesome together.</p>
+    data-aos-once="true" class="text-xl w-full font-normal text-white leading-tight">Let's make something awesome together.</p>
 
           
         </div>
