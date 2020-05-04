@@ -1,0 +1,7 @@
+{
+    "UF Teaching Assistant":{
+        "titleL": "University of Florida Teaching Assistant (Discrete Structures)",
+        "description": [ "Led weekly class discussions of over 40 students and developed a practice problem library with solutions in order to enhance students’ understanding of logic, algorithmic complexity, discrete probability, and graphs.", "Provided reviews of coding interview questions in order to enhance connection of subject matter to real world applications, including outlines of how course materials may be applied to fields in computer science - ultimately making the material less discrete from reality."],
+        "image": ["realAppeal.png"]
+    }
+}

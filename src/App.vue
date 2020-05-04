@@ -89,7 +89,7 @@
         </div>
         <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden">
 
-          <div id="mous" ref="mous" class="relative w-full h-full" style="height:600px; max-width: 1000px">
+          <div id="mous" ref="mous" class="relative w-full h-full mx-auto" style="height:600px; max-width: 1000px">
             <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="px-4 py-1" :class="elemDisplaying==ind ? ['bg-gray-800', 'text-white'] : ['text-gray-400', 'hover:text-white']"
             :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*10000), transform: 'scale(' + (3*val.z/4+1) + ')'}">
               
@@ -158,6 +158,7 @@ export default {
       sphereLoadTime: 10,
       sphereTime: 0,
       sphereRadius: 20,
+      sphereMaxTime: 250,
       sphereMaxRadius: 250,
 
       bezier: {
@@ -298,24 +299,37 @@ export default {
         }
       setTimeout(() => this.rotate(), this.updateTime)
     },
-    calcCenter(){
-      this.dots[0].x = this.$refs['mous'].clientWidth/2-25-500
-      this.dots[0].y = this.$refs['mous'].clientHeight/2-25-500
-      this.dots[1].x = this.$refs['mous'].clientWidth/2-25
+    checkMaxRadius(){
+      // console.log("Did it")
+      if (this.sphereMaxRadius != this.$refs['mous'].clientWidth/3-25){
+        // console.log("Fixed")
+        this.sphereMaxRadius = this.$refs['mous'].clientWidth/3-25
+        this.sphereRadius = this.bezierFunc(this.sphereTime/this.sphereMaxTime)*this.sphereMaxRadius
+        this.calcCenter(false)
+      }
+    setTimeout(() => this.checkMaxRadius(), 500)
+    },
+    calcCenter(calcZero){
+      if (calcZero){
+        this.dots[0].x = this.$refs['mous'].clientWidth/2-25-500
+        this.dots[0].y = this.$refs['mous'].clientHeight/2-25-500
+      }
+      this.dots[1].x = this.$refs['mous'].clientWidth/2-50
       this.dots[1].y = this.$refs['mous'].clientHeight/2-25
+      console.log("Centerx: " , this.dots[1].x ," Centery: ",this.dots[1].y)
     },
     bezierFunc(t) {
       let hold = 1-t
       return Math.pow(hold,3)*this.bezier.p0 + 3*Math.pow(hold,2)*t*this.bezier.p1 + 3*hold*Math.pow(t,2)*this.bezier.p2 + Math.pow(t,3)*this.bezier.p3
     },
     updateRadius(){
-      if (this.sphereTime < this.sphereMaxRadius-20){
+      if (this.sphereTime < this.sphereMaxTime-20){
         this.sphereTime += 3
-        this.sphereRadius = this.bezierFunc(this.sphereTime/this.sphereMaxRadius)*this.sphereMaxRadius
+        this.sphereRadius = this.bezierFunc(this.sphereTime/this.sphereMaxTime)*this.sphereMaxRadius
         setTimeout(() => this.updateRadius() , this.sphereLoadTime)
-      }else if (this.sphereTime < this.sphereMaxRadius){
+      }else if (this.sphereTime < this.sphereMaxTime){
         this.sphereTime += 1
-        this.sphereRadius = this.bezierFunc(this.sphereTime/this.sphereMaxRadius)*this.sphereMaxRadius
+        this.sphereRadius = this.bezierFunc(this.sphereTime/this.sphereMaxTime)*this.sphereMaxRadius
         setTimeout(() => this.updateRadius() , this.sphereLoadTime)
       }
     },
@@ -381,15 +395,15 @@ export default {
     },
   },
   mounted(){
-    console.log(projectsJSON)
-    console.log(Object.keys(projectsJSON).length)
+    // console.log(projectsJSON)
+    // console.log(Object.keys(projectsJSON).length)
     var temp = {}
     var rando = {}
     // console.log("here")
     
     
     var points = this.smartXYZ(Object.keys(projectsJSON).length)
-    this.calcCenter()
+    this.calcCenter(true)
     var project = {}
     for(var i=0; i < Object.keys(projectsJSON).length; i++){
       project = {}
@@ -410,6 +424,7 @@ export default {
       temp.b = Math.round(Math.random()*255)
       this.dots.push(temp)
     }
+    this.checkMaxRadius()
     setTimeout(() => this.rotate(), 30)
     setTimeout(() => this.sphereLoad = true, this.sphereLoadTime)
     setTimeout(() => this.updateRadius() , this.sphereLoadTime)
@@ -478,6 +493,10 @@ export default {
   text-decoration:  underline;
 
 
+}
+#mous{
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 </style>
