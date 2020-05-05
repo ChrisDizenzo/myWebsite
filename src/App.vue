@@ -67,7 +67,7 @@
           <div class="w-full flex justify-center " :style="{padding: (scrollDist>1) ? ((scrollDistVal-windowHeight)*6/4 + 'px 0px ' + '0px 0px') : '0px 0px 0px 0px', opacity: opacFunction(1)}">
           <div v-if="elemDisplaying==-1" class="px-2 flex flex-col items-start pointer-events-auto" style="width:90%" :style="{opacity: 1}">        
 
-          <p :data-aos="(scrollDist>1) ? 'fade-down' : 'fade-up'"
+          <p :data-aos="(scrollDist>1.1) ? 'fade-down' : 'fade-up'"
     data-aos-offset="200"
     data-aos-delay="0"
     data-aos-duration="600"
@@ -75,7 +75,7 @@
     data-aos-mirror="true"
     data-aos-once="false" class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 7rem"> Click on a project </p>
 
-          <div :data-aos="(scrollDist>1) ? 'fade-down' : 'fade-up'"
+          <div :data-aos="(scrollDist>1.1) ? 'fade-down' : 'fade-up'"
     data-aos-offset="200"
     data-aos-delay="0"
     data-aos-duration="600"
@@ -105,7 +105,7 @@
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="false"
-    data-aos-once="false" class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 6rem"> One more thing </p>
+    data-aos-once="false" class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 6rem"> Scroll to see About Me </p>
 
           <div :data-aos="(scrollDist>2) ? 'fade-down' : 'fade-up'"
     data-aos-offset="200"
@@ -114,7 +114,7 @@
     data-aos-easing="ease-in-out"
     data-aos-mirror="false"
     data-aos-once="false" class="flex items-baseline justify-start mb-48">
-            <p  class="text-2xl font-normal text-white my-3 leading-tight">To see more of my work and experience </p>
+            <p  class="text-2xl font-normal text-white my-3 leading-tight">To see more of my work and experience keep clicking on my projects!</p>
             <p class="mt-auto" id="about"></p>
           </div>
           
@@ -218,8 +218,20 @@
     </div>
     <div class="fixed top-0 overflow-y-auto h-screen w-full bg-white " :class="scrollDist>2.2 ? 'screenanim3' : 'screenanim'" style="z-index: 100;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
       <About  />
-      <Contact/>
+      <!-- <Contact/> -->
     </div>
+
+    <div class="fixed top-0 h-screen w-full bg-black" :class="scrollDist>2.2 ? 'screenanim' : 'screenanim3'" style="z-index: 104;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
+
+    </div>
+    <div class="fixed top-0 h-screen w-full bg-gray-700 screenanim2"  style="z-index: 105;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
+
+    </div>
+    <div class="fixed top-0 overflow-y-auto h-screen w-full bg-white " :class="scrollDist>2.2 ? 'screenanim3' : 'screenanim'" style="z-index: 106;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
+      <Resume  />
+    </div>
+
+    <Contact />
   </div>
 </template>
 
@@ -227,13 +239,15 @@
 import projectsJSON from './assets/data/projects.json'
 import TitleTypeVue from './components/TItleTypeVue'
 import About from './components/About'
+import Resume from './components/Resume'
 import Contact from './components/Contact'
 export default {
   name: 'App',
   components: {
     TitleTypeVue,
     About,
-    Contact
+    Contact,
+    Resume
   },
   data: function () {
     return {
@@ -264,7 +278,7 @@ export default {
       speedratio: 1/5,
       speedNumber: 5,
       slowratio: 1/20,
-      slowestSpeed: .003,
+      slowestSpeed: .005,
 
       sphereLoad: false,
       sphereLoadTime: 10,
@@ -391,6 +405,8 @@ export default {
       else{
         pitch = -1*(this.dots[this.elemDisplaying+2].x-this.dots[1].x)/(this.$refs['mous'].clientWidth*this.speedNumber)*this.speedratio + (1-this.speedratio)*this.lastpitch
         roll =  1*(this.dots[this.elemDisplaying+2].y-this.dots[1].y)/(this.$refs['mous'].clientHeight*this.speedNumber)*this.speedratio+ (1-this.speedratio)*this.lastroll
+        pitch = Math.round(pitch*1000)/1000
+        roll = Math.round(roll*1000)/1000
       }
         this.lastpitch = pitch
         this.lastroll = roll
