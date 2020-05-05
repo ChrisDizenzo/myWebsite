@@ -1,8 +1,10 @@
 <template>
   <div id="app" class="font-sans flex flex-col overflow-y-hidden" ref="app">
     <div class="fixed top-0 h-screen w-screen z-0 opacity-50">
-      <video autoplay muted loop id="myVideo" class="w-screen">
-        <source src="./assets/earf.mp4" type="video/mp4">
+      <video autoplay muted id="myVideo" class="w-screen">
+        <source class="active" src="./assets/earf.mp4" id="vid1" type="video/mp4">
+        <source class="inactive" src="./assets/earfR.mp4" id="vid2" type="video/mp4">
+
       </video>
     </div>
     
@@ -495,10 +497,31 @@ export default {
     var rando = {}
     document.addEventListener('scroll', this.handleScroll)
     // console.log("here")
-    this.myVideo = document.getElementById("myVideo");
     let myVid = document.getElementById("myVideo");
-    myVid.playbackRate = 1
-    setTimeout(() => this.myVideo.playbackRate = -1*this.myVideo.playbackRate, 3000)
+    myVid.playbackRate = 0
+    // let reversey = function() {
+    //   // get the active source and the next video source.
+    //   // I set it so if there's no next, it loops to the first one
+    //   var activesource = document.getElementById("vid1");
+
+    //   var nextsource = document.getElementById("vid2");
+      
+    //   // deactivate current source, and activate next one
+    //   if(activesource.className=="active") activesource.className="inactive"
+    //   else {
+    //     activesource.className="active"
+    //     myVid.src = activesource.src
+    //   } 
+    //   if(nextsource.className=="active") nextsource.className="inactive"
+    //   else {
+    //     nextsource.className="active"
+    //     myVid.src = nextsource.src
+    //   } 
+      
+    //   setTimeout(() => reversey(), 3000)
+    // };
+    // setTimeout(() => reversey(), 3000)
+
     
     var points = this.smartXYZ(Object.keys(projectsJSON).length)
     this.calcCenter(true)
