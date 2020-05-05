@@ -83,7 +83,7 @@
             </ul>
             
             <h1>{{ val.images[ind] }} </h1>
-            <!-- <img v-bind:src="require('./assets/' + val.images[ind])"  alt='no image'/> -->
+            <img v-bind:src="require('./assets/projectimages/' + val.images[0])"  alt='no image'/>
           </div>
         </div>
         <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden">
@@ -114,6 +114,7 @@
     </div>
     
     <About />
+    <Contact/>
   </div>
 </template>
 
@@ -121,11 +122,13 @@
 import projectsJSON from './assets/data/projects.json'
 import TitleTypeVue from './components/TItleTypeVue'
 import About from './components/About'
+import Contact from './components/Contact'
 export default {
   name: 'App',
   components: {
     TitleTypeVue,
-    About
+    About,
+    Contact
   },
   data: function () {
     return {
@@ -390,8 +393,8 @@ export default {
     },
   },
   mounted(){
-    // console.log(projectsJSON)
-    // console.log(Object.keys(projectsJSON).length)
+    console.log(projectsJSON)
+    console.log(Object.keys(projectsJSON).length)
     var temp = {}
     var rando = {}
     // console.log("here")
@@ -404,6 +407,7 @@ export default {
       project = {}
       project = projectsJSON[Object.keys(projectsJSON)[i]]
       project.title = Object.keys(projectsJSON)[i]
+      console.log(project)
       this.projects.push(project)
       temp = {}
       temp.name = Object.keys(projectsJSON)[i]
@@ -417,6 +421,7 @@ export default {
       temp.r = Math.round(Math.random()*255)
       temp.g = Math.round(Math.random()*255)
       temp.b = Math.round(Math.random()*255)
+      console.log(temp.name)
       this.dots.push(temp)
     }
     this.checkMaxRadius()

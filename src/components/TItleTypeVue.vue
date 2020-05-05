@@ -3,7 +3,7 @@
         <vue-typed-js :strings="msg" :showCursor="false" :startDelay="sDelay" @onComplete="hideCursor" :typeSpeed="30">
         <p class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 9rem"> <span class="typing"></span> </p>
         </vue-typed-js>
-        <div class="w-2 hoverable" :class="cursorShow? 'bg-white' : 'bg-black'" style="height: 9rem;">
+        <div class="w-2 hoverable" :class="cursorShow? 'bg-white' : 'hidden'" style="height: 9rem;">
         </div>
     </div>
 </template>
