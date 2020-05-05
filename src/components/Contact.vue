@@ -1,9 +1,9 @@
 <template>
   <div class="h-screen bg-white w-full z-10 flex flex-col items-center">
         <div class="container flex flex-col items-center">
-            <p class="text-6xl w-full text-bold text-gray-900 text-center leading-tight" style="font-weight: 700; font-size: 8rem">{{email}}</p>    
-            <p class="text-6xl w-full text-bold text-gray-900 text-center leading-tight" style="font-weight: 700; font-size: 8rem">{{linkedin}}</p>   
-            <p class="text-6xl w-full text-bold text-gray-900 text-center leading-tight" style="font-weight: 700; font-size: 8rem">{{phoneNumber}}</p>       
+            <p class="text-6xl w-full text-bold text-gray-900 text-center leading-tight" style="font-weight: 700;">{{email}}</p>    
+            <p class="text-6xl w-full text-bold text-gray-900 text-center leading-tight" style="font-weight: 700;">{{linkedin}}</p>   
+            <p class="text-6xl w-full text-bold text-gray-900 text-center leading-tight" style="font-weight: 700;">{{phoneNumber}}</p>       
         </div>
         <div class="container flex flex-col items-center">
             <title class="text-6xl w-full text-bold text-gray-900 text-center leading-tight">{{TA['UF Teaching Assistant'].titleL}}</title>

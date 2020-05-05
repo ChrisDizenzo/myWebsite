@@ -13,6 +13,7 @@
     "tailwindcss": "^1.4.4",
     "typed.js": "^2.0.11",
     "vue": "^2.6.11",
+    "vue-scrollmagic": "^1.2.0",
     "vue-typed-js": "^0.1.2"
   },
   "devDependencies": {

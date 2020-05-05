@@ -1,30 +1,16 @@
 <template>
-  <div id="app" class="font-sans flex flex-col" ref="app" @mousemove="updateValues($event)" >
-    <div class="h-screen w-full flex flex-col ">
-      <div class="w-full flex justify-center items-center  py-3">
-        <div data-aos="fade-down"
-    data-aos-offset="0"
-    data-aos-delay="0"
-    data-aos-duration="600"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="true" class="container flex items-baseline text-white justify-between">
-          <p class="text-xl opacity-75 font-medium cursor-pointer hover:opacity-100">Chris DiZenzo</p>
-          <div class="flex items-baseline">
-            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8">About</p>
-            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8">Resume</p>
-            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded  py-2 px-4 mx-8">Contact</p>
-            
-          </div>
-        </div>
-      </div>
-    <!-- <h1>{{dots[0].x}} , {{dots[0].y}}</h1> -->
-    <!-- <h1>{{dots[1].x}} , {{dots[1].y}}</h1> -->
-    <!-- <h1>{{lastpitch}} , {{lastroll}}</h1> -->
-    <div class="h-screen w-full -mt-16 pointer-events-none">
-      <div class="flex w-full h-screen justify-end items-center relative">
-        <div class="absolute w-1/2 flex justify-center " style="top:25%; left:0px; ">
-          <div v-if="elemDisplaying==-1" class="px-2 flex flex-col items-start pointer-events-auto" style="width:90%">
+  <div id="app" class="font-sans flex flex-col overflow-y-hidden" ref="app">
+    <div class="fixed top-0 h-screen w-screen z-0 opacity-50">
+      <video autoplay muted loop id="myVideo" class="w-screen">
+        <source src="./assets/earf.mp4" type="video/mp4">
+      </video>
+    </div>
+    
+    <div class="w-1/2 mr-auto flex flex-col" style="height: 300vh; z-index:100">
+      <div class="w-full h-screen flex flex-col justify-center" :style="{padding: -scrollDistVal/2 + 'px 0px ' + '0px 0px',}" >
+
+        <div class="w-full flex justify-center " :style="{padding: scrollDistVal + 'px 0px ' + '0px 0px',}">
+          <div v-if="elemDisplaying==-1" class="px-2 flex flex-col items-start pointer-events-auto" style="width:90%" :style="{opacity: ((scrollDist+1)*(scrollDist-0.5) *-2)}">
           <TitleTypeVue :msg="['Hello,']" :sDelay="500" :cDelay="5" />
           <TitleTypeVue :msg="['I\'m Chris!']" :sDelay="1500" :cDelay="400" :typeFade="true"/>
           
@@ -73,8 +59,113 @@
           
         </div>
         </div>
+      </div>
+      
+        <div class=" h-screen flex flex-col justify-center w-full " :style="{padding: (scrollDist>1) ? (-scrollDistVal/2 + 'px 0px 0px 0px') : '0px 0px 0px 0px',}">
+          <div class="w-full flex justify-center " :style="{padding: (scrollDist>1) ? ((scrollDistVal-windowHeight)*6/4 + 'px 0px ' + '0px 0px') : '0px 0px 0px 0px', opacity: opacFunction(1)}">
+          <div v-if="elemDisplaying==-1" class="px-2 flex flex-col items-start pointer-events-auto" style="width:90%" :style="{opacity: 1}">        
+
+          <p :data-aos="(scrollDist>1) ? 'fade-down' : 'fade-up'"
+    data-aos-offset="200"
+    data-aos-delay="0"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="false" class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 7rem"> Click on a project </p>
+
+          <div :data-aos="(scrollDist>1) ? 'fade-down' : 'fade-up'"
+    data-aos-offset="200"
+    data-aos-delay="0"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="false" class="flex items-baseline justify-start">
+            <p  class="text-2xl font-normal text-white my-3 leading-tight">To learn more about what I've made </p>
+
+          </div>
+          
+
+          <div class="flex flex-col justify-between items-baseline">
+          </div>
+          
+
+          
+        </div>
+        </div>
+      </div>
+      <div class=" h-screen flex flex-col justify-center w-full " :style="{padding: (scrollDist>2) ? (-scrollDistVal/2 + 'px 0px 0px 0px') : '0px 0px 0px 0px',}">
+          <div class="w-full flex justify-center " :style="{padding: (scrollDist>2) ? ((scrollDistVal-windowHeight*2)*6/4 + 'px 0px ' + '0px 0px') : '0px 0px 0px 0px', opacity: opacFunction(2)}">
+          <div v-if="elemDisplaying==-1" class="px-2 flex flex-col items-start pointer-events-auto" style="width:90%" :style="{opacity: 1}">        
+
+          <p :data-aos="(scrollDist>2) ? 'fade-down' : 'fade-up'"
+    data-aos-offset="200"
+    data-aos-delay="0"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="false"
+    data-aos-once="false" class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 6rem"> One more thing </p>
+
+          <div :data-aos="(scrollDist>2) ? 'fade-down' : 'fade-up'"
+    data-aos-offset="200"
+    data-aos-delay="0"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="false"
+    data-aos-once="false" class="flex items-baseline justify-start mb-48">
+            <p  class="text-2xl font-normal text-white my-3 leading-tight">To see more of my work and experience </p>
+
+          </div>
+          
+
+          <div class="flex flex-col justify-between items-baseline">
+            <!-- <p data-aos="fade-left"
+    data-aos-offset="200"
+    data-aos-delay="2500"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true" class="text-2xl w-full font-normal text-white leading-tight">The rules are simple:</p>
+            <p data-aos="fade-left"
+    data-aos-offset="200"
+    data-aos-delay="2600"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true" class="text-xl w-full font-light text-center text-white  leading-tight">You give me <span class="italic">pasta</span>, I give you <span class="font-medium">code.</span></p> -->
+          </div>
+          
+
+          
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="fixed top-0 h-screen w-full flex flex-col " >
+      <div class="w-full flex justify-center items-center  py-3">
+        <div data-aos="fade-down"
+    data-aos-offset="0"
+    data-aos-delay="0"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true" class="container flex items-baseline text-white justify-between" >
+          <p class="text-xl opacity-75 font-medium cursor-pointer hover:opacity-100">Chris DiZenzo</p>
+          <div class="flex items-baseline">
+            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8">About</p>
+            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8">Resume</p>
+            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded  py-2 px-4 mx-8">Contact</p>
+            
+          </div>
+        </div>
+      </div>
+    <!-- <h1>{{dots[0].x}} , {{dots[0].y}}</h1> -->
+    <!-- <h1>{{dots[1].x}} , {{dots[1].y}}</h1> -->
+    <!-- <h1>{{lastpitch}} , {{lastroll}}</h1> -->
+    <div class="h-screen w-full -mt-16 ">
+      <div class="flex w-full h-screen justify-end items-center relative">
         
-        <div v-if="elemDisplaying!=-1" class="w-3/4 flex items-baseline justify-between text-white">
+        
+        <div v-if="elemDisplaying!=-1" class="w-1/2 flex items-baseline justify-between text-white" >
         
           <div v-for="(val,ind) in projects" :key="ind" v-show="elemDisplaying==ind">
             <p class="text-6xl w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 6rem">{{val.title}}</p>
@@ -86,7 +177,7 @@
             <img v-bind:src="require('./assets/projectimages/' + val.images[0])"  alt='no image'/>
           </div>
         </div>
-        <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden">
+        <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)"  style="z-index: 100;" :style="{transform: (scrollDist>2) ? 'translateY('+ -1/4*((scrollDistVal-windowHeight*2)*6/4) + 'px)' : 'translateY(0px)', opacity: opacFunction(2)}">
 
           <div id="mous" ref="mous" class="relative w-full h-full mx-auto" style="height:600px; max-width: 1000px">
             <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="px-4 py-1" :class="elemDisplaying==ind ? ['bg-gray-800', 'text-white'] : ['text-gray-400', 'hover:text-white']"
@@ -133,6 +224,11 @@ export default {
   data: function () {
     return {
       cursorShow : true,
+      scrollDist: 0,
+      scrollDistVal: 0,
+      windowHeight: 0,
+      myVideo: undefined,
+
 
       pointerx: 0,
       pointery: 0,
@@ -166,23 +262,9 @@ export default {
         p3: 1,
       },
 
-      // projects: [
-      //   {
-      //     title: 'Hubub', 
-      //     desc: 'This was my first major iOS app that deployed to the App Store'
-      //   },
-      //   {
-      //     title: 'webcam ML', 
-      //     desc: 'This was Machine Learning project that tracks my hand'
-      //   },
-      //   {
-      //     title: 'realAppeal', 
-      //     desc: 'This was a website I developed in Vue',
-      //     img: 'https://static.wixstatic.com/media/d3cd5a_9edfed9ee4b641ca9dfff6a371963886~mv2.png/v1/fill/w_50,h_34,al_c,q_85,usm_0.66_1.00_0.01/realAppeal_icon.webp',
-      //   }
-      // ],
       projects: [],
       updateTime: 30,
+
 
       dots: [
         {
@@ -213,6 +295,14 @@ export default {
     hideCursor() {
       setTimeout(() => this.cursorShow = false, 500)
     },
+    opacFunction(val) {
+      if(this.scrollDist > (val + 0.25)) {
+        return ((this.scrollDist-(val-0.5))*(this.scrollDist-(val+.5)) *-2)
+      } else {
+        return 1
+      }
+        
+    },
     displayElem(val) {
       if(this.elemDisplaying != val) {
         this.elemDisplaying = val
@@ -228,6 +318,12 @@ export default {
       }
 
 
+    },
+    handleScroll() {
+      this.windowHeight = window.innerHeight
+
+      this.scrollDist = (window.scrollY/this.windowHeight)
+      this.scrollDistVal = window.scrollY
     },
     updateValues(event) {
       
@@ -397,8 +493,12 @@ export default {
     console.log(Object.keys(projectsJSON).length)
     var temp = {}
     var rando = {}
+    document.addEventListener('scroll', this.handleScroll)
     // console.log("here")
-    
+    this.myVideo = document.getElementById("myVideo");
+    let myVid = document.getElementById("myVideo");
+    myVid.playbackRate = 1
+    setTimeout(() => this.myVideo.playbackRate = -1*this.myVideo.playbackRate, 3000)
     
     var points = this.smartXYZ(Object.keys(projectsJSON).length)
     this.calcCenter(true)
@@ -437,6 +537,7 @@ export default {
   },
   computed: {
       
+    
   },
 }
 </script>

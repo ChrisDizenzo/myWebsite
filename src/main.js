@@ -4,6 +4,7 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import VueTypedJs from 'vue-typed-js'
 
+
 Vue.use(VueTypedJs)
 AOS.init()
 
