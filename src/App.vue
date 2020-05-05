@@ -160,9 +160,6 @@
           </div>
         </div>
       </div>
-    <!-- <h1>{{dots[0].x}} , {{dots[0].y}}</h1> -->
-    <!-- <h1>{{dots[1].x}} , {{dots[1].y}}</h1> -->
-    <!-- <h1>{{lastpitch}} , {{lastroll}}</h1> -->
     <div class="h-screen w-full -mt-16 ">
       <div class="flex w-full h-screen justify-end items-center relative">
         
@@ -179,9 +176,11 @@
             <img v-bind:src="require('./assets/projectimages/' + val.images[0])"  alt='no image'/>
           </div>
         </div>
-        <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)"  style="z-index: 100;" :style="{transform: (scrollDist>2) ? 'translateY('+ -1/4*((scrollDistVal-windowHeight*2)*6/4) + 'px)' : 'translateY(0px)', opacity: opacFunction(2)}">
+        <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 100;" :style="{transform: (scrollDist>2) ? 'translateY('+ -1/4*((scrollDistVal-windowHeight*2)*6/4) + 'px)' : 'translateY(0px)', opacity: opacFunction(2)}">
 
           <div id="mous" ref="mous" class="relative w-full h-full mx-auto" style="height:600px; max-width: 1000px">
+            <!-- <p class="text-white">{{dots[0].x}} , {{dots[0].y}}</p> -->
+            <!-- <p class="text-white">{{dots[1].y}} , {{dots[1].y}}</p> -->
             <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="px-4 py-1" :class="elemDisplaying==ind ? ['bg-gray-800', 'text-white'] : ['text-gray-400', 'hover:text-white']"
             :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*10000), transform: 'scale(' + (3*val.z/4+1) + ')'}">
               
@@ -243,6 +242,7 @@ export default {
       offsetLeft: 1000,
       elemDisplaying: -1,
 
+      mousee: false,
       lastpitch: 1/16,
       lastroll: -1/4,
       speedratio: 1/5,
@@ -328,20 +328,17 @@ export default {
       this.scrollDistVal = window.scrollY
     },
     updateValues(event) {
-      
-      // this.pointerx = event.screenX
-      // this.pointery = event.screenY
       this.pointerx = event.pageX-10
       this.pointery = event.pageY -10 
-      this.dots[0].x = event.pageX - this.$refs['mous'].offsetLeft-20
-      this.dots[0].y = event.pageY - this.$refs['mous'].offsetTop-20
+      this.dots[0].x = event.pageX - this.$refs['mous'].parentElement.offsetLeft-20
+      this.dots[0].y = event.pageY - this.$refs['mous'].parentElement.offsetTop-20
     },
     rotate() {
       var pitch = 0
       var roll =  0
       var yaw = 0
       if ((this.elemDisplaying==-1)){
-        if ((Math.abs(this.dots[0].x-this.dots[1].x) < this.$refs['mous'].clientWidth/2 && Math.abs(this.dots[0].y-this.dots[1].y) < this.$refs['mous'].clientHeight/2)){
+        if ((this.mousee)){
           pitch = -1*(this.dots[0].x-this.dots[1].x)/(this.$refs['mous'].clientWidth*this.speedNumber)*this.speedratio + (1-this.speedratio)*this.lastpitch
           roll =  1*(this.dots[0].y-this.dots[1].y)/(this.$refs['mous'].clientHeight*this.speedNumber)*this.speedratio+ (1-this.speedratio)*this.lastroll
         }
@@ -394,6 +391,12 @@ export default {
             this.dots[i].z = this.dots[i].coordinate[2]*this.sphereRadius/this.sphereMaxRadius;
         }
       setTimeout(() => this.rotate(), this.updateTime)
+    },
+    mouseEnter(){
+      this.mousee = true
+    },
+    mouseLeave(){
+      this.mousee = false
     },
     checkMaxRadius(){
       // console.log("Did it")
