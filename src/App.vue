@@ -8,7 +8,7 @@
       </video>
     </div>
     
-    <div class="w-1/2 mr-auto flex flex-col" style="height: 300vh; z-index:100">
+    <div class="w-1/2 mr-auto flex flex-col overflow-y-hidden" style="height: 320vh; z-index:100">
       <div class="w-full h-screen flex flex-col justify-center" :style="{padding: -scrollDistVal/2 + 'px 0px ' + '0px 0px',}" >
 
         <div class="w-full flex justify-center " :style="{padding: scrollDistVal + 'px 0px ' + '0px 0px',}">
@@ -115,7 +115,7 @@
     data-aos-mirror="false"
     data-aos-once="false" class="flex items-baseline justify-start mb-48">
             <p  class="text-2xl font-normal text-white my-3 leading-tight">To see more of my work and experience </p>
-
+            <p class="mt-auto" id="about"></p>
           </div>
           
 
@@ -142,7 +142,10 @@
         </div>
       </div>
     </div>
-    <div class="fixed top-0 h-screen w-full flex flex-col " >
+
+    
+
+    <div class="fixed top-0 h-screen w-full flex flex-col " style="z-index: 150">
       <div class="w-full flex justify-center items-center  py-3">
         <div data-aos="fade-down"
     data-aos-offset="0"
@@ -150,10 +153,10 @@
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
-    data-aos-once="true" class="container flex items-baseline text-white justify-between" >
+    data-aos-once="true" class="container flex items-baseline justify-between" :class="'text-white'" style="z-index: 100" >
           <p class="text-xl opacity-75 font-medium cursor-pointer hover:opacity-100">Chris DiZenzo</p>
           <div class="flex items-baseline">
-            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8">About</p>
+            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8" v-scroll-to="{duration: 1500, el: '#about'}">About</p>
             <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8">Resume</p>
             <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded  py-2 px-4 mx-8">Contact</p>
             
@@ -197,6 +200,7 @@
         </div>
       </div>
     </div>
+    
 
 
     
@@ -205,8 +209,17 @@
 
     </div>
     
-    <About />
-    <Contact/>
+    
+    <div class="fixed top-0 h-screen w-full bg-black" :class="scrollDist>2.2 ? 'screenanim' : 'screenanim3'" style="z-index: 100;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
+
+    </div>
+    <div class="fixed top-0 h-screen w-full bg-gray-700 screenanim2"  style="z-index: 100;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
+
+    </div>
+    <div class="fixed top-0 overflow-y-auto h-screen w-full bg-white " :class="scrollDist>2.2 ? 'screenanim3' : 'screenanim'" style="z-index: 100;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
+      <About  />
+      <Contact/>
+    </div>
   </div>
 </template>
 
@@ -226,9 +239,12 @@ export default {
     return {
       cursorShow : true,
       scrollDist: 0,
+      scrollDistPrev: 0,
       scrollDistVal: 0,
       windowHeight: 0,
       myVideo: undefined,
+      animateScreen: -1,
+      storeScrollY: 0,
 
 
       pointerx: 0,
@@ -322,16 +338,37 @@ export default {
 
     },
     handleScroll() {
-      this.windowHeight = window.innerHeight
+      if(this.animateScreen!= -1) {
+        window.scrollTo(0, this.storeScrollY);
+        
+      } else {
+        this.windowHeight = window.innerHeight
+        this.scrollDistPrev = this.scrollDist
+        this.scrollDist = (window.scrollY/this.windowHeight)
+        this.scrollDistVal = window.scrollY
+      }
+      
+      console.log(this.scrollDistPrev, this.scrollDist)
 
-      this.scrollDist = (window.scrollY/this.windowHeight)
-      this.scrollDistVal = window.scrollY
+      if(this.scrollDistPrev <2.2 && this.scrollDist > 2.2 && this.animateScreen==-1) {
+        this.animateScreen = 0
+        this.storeScrollY = window.scrollY
+        setTimeout(() => this.animateScreen = -1, 1300)
+        setTimeout(() => this.animateScreen = -1, 1300)
+
+      } else if (this.scrollDistPrev > 2.2 && this.scrollDist < 2.2 && this.animateScreen==-1) { 
+        this.animateScreen = 1
+        this.storeScrollY = window.scrollY
+        setTimeout(() => this.animateScreen = -1, 1300)
+        setTimeout(() => this.animateScreen = -1, 1300)
+
+      }
     },
     updateValues(event) {
       this.pointerx = event.pageX-10
       this.pointery = event.pageY -10 
-      this.dots[0].x = event.pageX - this.$refs['mous'].parentElement.offsetLeft-20
-      this.dots[0].y = event.pageY - this.$refs['mous'].parentElement.offsetTop-20
+      this.dots[0].x = event.clientX - this.$refs['mous'].parentElement.offsetLeft-20
+      this.dots[0].y = event.clientY - this.$refs['mous'].parentElement.offsetTop-20
     },
     rotate() {
       var pitch = 0
@@ -496,6 +533,7 @@ export default {
   mounted(){
     console.log(projectsJSON)
     console.log(Object.keys(projectsJSON).length)
+    window.scrollTo(0,0);
     var temp = {}
     var rando = {}
     document.addEventListener('scroll', this.handleScroll)
@@ -562,7 +600,7 @@ export default {
     }, 50)
   },
   computed: {
-      
+  
     
   },
 }
@@ -624,6 +662,22 @@ export default {
 #mous{
   white-space: nowrap;
   overflow: hidden;
+}
+
+.screenanim {
+  transition: all 1.5s cubic-bezier(.17,.67,0,1);
+}
+.screenanim2 {
+  transition: all 1.5s cubic-bezier(.17,.67,0,1);
+  transition-delay: 0.2s;
+}
+.screenanim3 {
+  transition: all 1.5s cubic-bezier(.17,.67,0,1);
+  transition-delay: 0.4s;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+    display: none;
 }
 
 </style>
