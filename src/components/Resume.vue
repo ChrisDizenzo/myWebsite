@@ -184,7 +184,7 @@ export default {
   data: function () {
     return {
       filter: -1,
-      coursesKey: ["Software Engineering","Mathematics","Data Science"],
+      coursesKey: ["Software Engineering","Mathematics","Machine Learning"],
       courses: {
         "CEN3031 Software Engineering" : 0,
         "CIS4301 Information and Database Systems" : 0,
