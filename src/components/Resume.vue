@@ -15,7 +15,7 @@
 
               <div class="flex flex-col items-start w-full px-5 mb-6">
                 <p class="text-2xl text-left font-medium w-full mb-3">About Me</p>
-                <p class="text-md font-light text-left w-full">I'm a good land and I like long walks on sandy beaches. Don't even get me started on eating pasta.</p>
+                <p class="text-md font-light text-left w-full">I'm a good lad and I like long walks on sandy beaches. Don't even get me started on eating pasta.</p>
                 
               </div>
 
@@ -61,7 +61,7 @@
 
                   </div>
                   <div class="w-1/2 flex flex-col item-start">
-                    <p class="text-sm text-right">Expected Graduation: May 2020</p>
+                    <p class="text-sm text-right">Graduated: May 2020</p>
                     <p class="text-sm text-right">Major GPA:  3.83/4.0</p>
                     <p class="text-sm text-right">Minor GPA:  3.95/4.0	</p>
                     <p class="text-sm text-right">Cumulative GPA:  3.7/4.0	</p>
@@ -188,24 +188,24 @@ export default {
   data: function () {
     return {
       filter: -1,
-      coursesKey: ["Software Engineering","Mathematics","Machine Learning"],
+      coursesKey: ["Software Engineering","Machine Learning","Mathematics",],
       courses: {
         "CEN3031 Software Engineering" : 0,
-        "CIS4301 Information and Database Systems" : 0,
-        "MAA4402 Functions of Complex Variables" : 1,
+        "COT3100 Applied Discrete Structures" : 2,
+        "CDA3101 Intro Computer Organization" : 2,
         "COP3502: Prog. Fundamentals 1 (Java)" : 0,
         "COP3503: Prog. Fundamentals 2 (C++)" : 0,
-        "COT5615 Math for Intelligent Systems" : 2,
-        "EEL5840 Fundamentals of Machine Learning" : 2,
-        "CNT4007C Computer Networking" : 0,
         "COP3530 Data Structures and Alg." : 0,
-        "COT3100 Applied Discrete Structures" : 1,
-        "CDA3101 Intro Computer Organization" : 1,
-        "CAP6610 Machine Learning" : 2,
-        "STA4321 Fundamentals of Probability" : 2,
-        "MAD4401 Intro to Numerical Analysis" : 1,
-        "MAP4305 Intermediate Differential Equations" : 1,
-        "CIS4930 Data Science in Bioinformatics" : 2
+        "CNT4007C Computer Networking" : 0,
+        "CIS4301 Information and Database Systems" : 0,
+        "MAP4305 Intermediate Differential Equations" : 2,
+        "STA4321 Fundamentals of Probability" : 1,
+        "MAD4401 Intro to Numerical Analysis" : 2,
+        "MAA4403 Functions of Complex Variables" : 2,
+        "CIS4930 Data Science in Bioinformatics" : 1,
+        "COT5615 Math for Intelligent Systems" : 1,
+        "EEL5840 Fundamentals of Machine Learning" : 1,
+        "CAP6610 Machine Learning" : 3
       },
       courseGrades: {
         "CEN3031 Software Engineering" : 'A',
