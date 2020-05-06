@@ -48,21 +48,21 @@
         "images": ["realAppeal.png"],
         "link" : ""
     },
-    "UF Teaching Assistant":{
+    "UF TA'ing":{
         "titleL": "University of Florida Teaching Assistant (Discrete Structures)",
         "tags":["Applied Mathmatics"],
         "description": [ "Led weekly class discussions of over 40 students and developed a practice problem library with solutions in order to enhance students’ understanding of logic, algorithmic complexity, discrete probability, and graphs.", "Provided reviews of coding interview questions in order to enhance connection of subject matter to real world applications, including outlines of how course materials may be applied to fields in computer science - ultimately making the material less discrete from reality."],
         "images": ["uf-logo.png"],
         "link" : ""
     },
-    "2048-ML":{
+    "2048ML":{
         "titleL": "Machine Learning to play 2048",
         "tags":["Frontend Development", "Backend Development", "Machine Learning", "Data Science"],
         "description":["A website to collect data for labeled 2048 games", "Data pipelining and manipulation to increase robustness", "Created a Machine Learning algorithm using pytorch to play the 2048 game."],
         "images": ["2048.png"],
         "link" : ""
     },
-    "MachineKarting":{
+    "KartingML":{
         "titleL": "Machine Learning to drive around a racetrack in Unity",
         "tags":["Machine Learning"],
         "description":["Applied autodynamics from GatorMotorsports to create a drivable racecar in Unity.", "Using raycasting, the computer could see the track, and could control the accelaration and turning angle.","Used a genetic algorithm package (ML-Agents) to teach a computer to drive around a racetrack."],

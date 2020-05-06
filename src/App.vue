@@ -145,19 +145,13 @@
 
     
 
-    <div class="fixed top-0 h-screen w-full flex flex-col " style="z-index: 150">
+    <div class="fixed top-0 h-screen w-full flex flex-col " style="z-index: 1000">
       <div class="w-full flex justify-center items-center  py-3">
-        <div data-aos="fade-down"
-    data-aos-offset="0"
-    data-aos-delay="0"
-    data-aos-duration="600"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="true" class="container flex items-baseline justify-between" :class="'text-white'" style="z-index: 100" >
-          <p class="text-xl opacity-75 font-medium cursor-pointer hover:opacity-100">Chris DiZenzo</p>
+        <div  class="container flex items-baseline justify-between" :class="screenState==0 ? 'text-white' : 'text-black'" style="z-index: 1000" >
+          <p class="text-xl opacity-75 font-medium cursor-pointer hover:opacity-100" @click="changeState(0)">Chris DiZenzo</p>
           <div class="flex items-baseline">
-            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8" v-scroll-to="{duration: 1500, el: '#about'}">About</p>
-            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8">Resume</p>
+            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8" @click="changeState(1)" >About</p>
+            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8" @click="changeState(2)">Resume</p>
             <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded  py-2 px-4 mx-8">Contact</p>
             
           </div>
@@ -179,13 +173,13 @@
             <img v-bind:src="require('./assets/projectimages/' + val.images[0])"  alt='no image'/>
           </div>
         </div>
-        <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 100;" :style="{transform: (scrollDist>2) ? 'translateY('+ -1/4*((scrollDistVal-windowHeight*2)*6/4) + 'px)' : 'translateY(0px)', opacity: opacFunction(2)}">
+        <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 50;" :style="{transform: (scrollDist>2) ? 'translateY('+ -1/4*((scrollDistVal-windowHeight*2)*6/4) + 'px)' : 'translateY(0px)', opacity: opacFunction(2)}">
 
-          <div id="mous" ref="mous" class="relative w-full h-full mx-auto" style="height:600px; max-width: 1000px">
+          <div id="mous" ref="mous" class="relative w-full h-full mx-auto" style="height:1000px; max-width: 1000px">
             <!-- <p class="text-white">{{dots[0].x}} , {{dots[0].y}}</p> -->
             <!-- <p class="text-white">{{dots[1].y}} , {{dots[1].y}}</p> -->
             <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="px-4 py-1" :class="elemDisplaying==ind ? ['bg-gray-800', 'text-white'] : ['text-gray-400', 'hover:text-white']"
-            :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*10000), transform: 'scale(' + (3*val.z/4+1) + ')'}">
+            :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.coordinate.z+1)*40), transform: 'scale(' + (3*val.z/4+1) + ')'}">
               
               <p v-if="projects[ind].images" class="spheretext text-2xl font-medium"  style="cursor: pointer;" :class="elemDisplaying==ind ? [''] : ''">{{val.name}}</p>
               <!-- <img v-bind:src="'./assets/' + 'ME.png'" alt="no image" style="font-size: 1rem; cursor: pointer; font-weight: 800; transform: scale(.1)"> -->
@@ -210,26 +204,41 @@
     </div>
     
     
-    <div class="fixed top-0 h-screen w-full bg-black" :class="scrollDist>2.2 ? 'screenanim' : 'screenanim3'" style="z-index: 100;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
+    <div class="fixed top-0 h-screen w-full bg-black" :class="screenState==1 ? 'screenanim' : 'screenanim3'" style="z-index: 150;"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
 
     </div>
-    <div class="fixed top-0 h-screen w-full bg-gray-700 screenanim2"  style="z-index: 100;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
+    <div class="fixed top-0 h-screen w-full bg-gray-700 screenanim2"  style="z-index: 150;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
 
     </div>
-    <div class="fixed top-0 overflow-y-auto h-screen w-full bg-white " :class="scrollDist>2.2 ? 'screenanim3' : 'screenanim'" style="z-index: 100;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
-      <About  />
-      <!-- <Contact/> -->
+    <div id="abt" class="fixed top-0 h-screen w-full bg-white " :class="screenState==1 ? 'screenanim3' : 'screenanim'" style="z-index: 150;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
+      
+
     </div>
 
-    <div class="fixed top-0 h-screen w-full bg-black" :class="scrollDist>2.2 ? 'screenanim' : 'screenanim3'" style="z-index: 104;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
+    
+    <div class="fixed top-0 h-screen w-full bg-black" :class="screenState==2 ? 'screenanim' : 'screenanim3'" style="z-index: 151;"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+
+    </div>
+    <div class="fixed top-0 h-screen w-full bg-gray-700 screenanim2"  style="z-index: 151;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+
+    </div>
+    <div id="abt" class="fixed top-0 h-screen w-full bg-white " :class="screenState==2 ? 'screenanim3' : 'screenanim'" style="z-index: 151;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+      
+
+    </div>
+
+
+    <!-- <div class="fixed top-0 h-screen w-full bg-black" :class="scrollDist>2.2 ? 'screenanim' : 'screenanim3'" style="z-index: 104;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
 
     </div>
     <div class="fixed top-0 h-screen w-full bg-gray-700 screenanim2"  style="z-index: 105;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
 
     </div>
     <div class="fixed top-0 overflow-y-auto h-screen w-full bg-white " :class="scrollDist>2.2 ? 'screenanim3' : 'screenanim'" style="z-index: 106;" v-if="scrollDist>2" :style="{margin: ((scrollDist>2.2) ? 0 : (windowHeight+5))+'px 0px 0px 0px', 'z-index': 150}">
-      <Resume  />
-    </div>
+    </div> -->
+
+    <About />
+    <Resume  />
 
     <Contact />
   </div>
@@ -259,6 +268,7 @@ export default {
       myVideo: undefined,
       animateScreen: -1,
       storeScrollY: 0,
+      screenState: 0,
 
 
       pointerx: 0,
@@ -324,6 +334,9 @@ export default {
     }
   },
   methods: {
+    changeState(val) {
+      this.screenState = val
+    },
     hideCursor() {
       setTimeout(() => this.cursorShow = false, 500)
     },
@@ -352,31 +365,8 @@ export default {
 
     },
     handleScroll() {
-      if(this.animateScreen!= -1) {
-        window.scrollTo(0, this.storeScrollY);
-        
-      } else {
-        this.windowHeight = window.innerHeight
-        this.scrollDistPrev = this.scrollDist
-        this.scrollDist = (window.scrollY/this.windowHeight)
-        this.scrollDistVal = window.scrollY
-      }
-      
-      console.log(this.scrollDistPrev, this.scrollDist)
+      this.scrollDist = window.scrollY/window.innerHeight
 
-      if(this.scrollDistPrev <2.2 && this.scrollDist > 2.2 && this.animateScreen==-1) {
-        this.animateScreen = 0
-        this.storeScrollY = window.scrollY
-        setTimeout(() => this.animateScreen = -1, 1300)
-        setTimeout(() => this.animateScreen = -1, 1300)
-
-      } else if (this.scrollDistPrev > 2.2 && this.scrollDist < 2.2 && this.animateScreen==-1) { 
-        this.animateScreen = 1
-        this.storeScrollY = window.scrollY
-        setTimeout(() => this.animateScreen = -1, 1300)
-        setTimeout(() => this.animateScreen = -1, 1300)
-
-      }
     },
     updateValues(event) {
       this.pointerx = event.pageX-10
@@ -548,6 +538,7 @@ export default {
   },
   mounted(){
     console.log(projectsJSON)
+    this.windowHeight = window.innerHeight
     console.log(Object.keys(projectsJSON).length)
     window.scrollTo(0,0);
     var temp = {}
@@ -616,9 +607,19 @@ export default {
     }, 50)
   },
   computed: {
-  
-    
+
   },
+  watch: {
+    scrollDist() {
+      console.log(this.scrollDist)
+      if(this.scrollDist > 2 && this.scrollDist<3) {
+        this.changeState(1)
+
+      } else if (this.scrollDist > 3) {
+        this.changeState(2)
+      }
+    }
+  }
 }
 </script>
 
