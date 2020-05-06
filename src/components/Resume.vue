@@ -62,9 +62,9 @@
                   </div>
                   <div class="w-1/2 flex flex-col item-start">
                     <p class="text-sm text-right">Expected Graduation: May 2020</p>
-                    <p class="text-sm text-right">Major GPA:  3.70/4.0</p>
+                    <p class="text-sm text-right">Major GPA:  3.83/4.0</p>
                     <p class="text-sm text-right">Minor GPA:  3.95/4.0	</p>
-                    <p class="text-sm text-right">Cumulative GPA:  3.67/4.0	</p>
+                    <p class="text-sm text-right">Cumulative GPA:  3.7/4.0	</p>
                     
 
                   </div>
