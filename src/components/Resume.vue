@@ -1,6 +1,6 @@
 <template>
     <div class="h-screen bg-white w-full z-10 flex flex-col items-center">
-      <div class="container flex flex-col items-center">
+      <div class="container flex flex-col items-center mt-16">
         <p class="text-6xl w-full text-bold text-gray-900 text-center leading-tight" style="font-weight: 700;">Resume</p>        
         <!-- <img alt="Vue logo" src="../assets/ME.png"> -->
         <div>Courses</div>
