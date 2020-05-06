@@ -191,7 +191,7 @@
         <div v-if="elemDisplaying!=-1" class="w-1/2 flex items-baseline justify-between text-white" >
         
           <div v-for="(val,ind) in projects" :key="ind" v-show="elemDisplaying==ind" class="bg-black opacity-75 rounded-lg px-8 py-8">
-            <img v-bind:src="require('./assets/projectimages/' + val.images[0])" class="max-w-64 max-h-64 mx-auto" style="max-height: 16rem; max-width: 16rem" alt='no image'/>
+            <img v-bind:src="require('./assets/projectimages/' + val.images[0])" class="max-w-64 max-h-64 mx-auto" style="max-height: 25rem; max-width: 25rem" alt='no image'/>
 
             <TitleTypeVue :msg="[val.title]" :sDelay="500" :cDelay="5" />
             <ul data-aos="fade-up"
