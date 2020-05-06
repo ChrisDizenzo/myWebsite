@@ -87,7 +87,11 @@
               </div>
               <div class="flex w-full items-center">
                 <div class="flex flex-wrap w-full  items-center">
-                    <p v-for="(course, ind) in Object.keys(courses)" :key="ind" v-show="filter==-1 || filter==courses[course]" class="w-1/2 text-sm text-blue-900 text-left">{{course}}</p>
+                    <div v-for="(course, ind) in Object.keys(courses)" :key="ind" v-show="filter==-1 || filter==courses[course]" class="w-1/2 flex pr-12 items-baseline">
+                      <p class="text-sm text-blue-900 text-left">{{course}}</p>
+                      <p class="text-sm ml-auto text-blue-900 text-left w-4">{{courseGrades[course]}}</p>
+
+                    </div>
                     
                   
                 </div>
@@ -189,16 +193,37 @@ export default {
         "CEN3031 Software Engineering" : 0,
         "CIS4301 Information and Database Systems" : 0,
         "MAA4402 Functions of Complex Variables" : 1,
+        "COP3502: Prog. Fundamentals 1 (Java)" : 0,
         "COP3503: Prog. Fundamentals 2 (C++)" : 0,
-        "EGM2511: Engineering Mechanics" : 1,
-        "COP4600 Operating Systems" : 0,
         "COT5615 Math for Intelligent Systems" : 2,
         "EEL5840 Fundamentals of Machine Learning" : 2,
         "CNT4007C Computer Networking" : 0,
+        "COP3530 Data Structures and Alg." : 0,
+        "COT3100 Applied Discrete Structures" : 1,
+        "CDA3101 Intro Computer Organization" : 1,
         "CAP6610 Machine Learning" : 2,
         "STA4321 Fundamentals of Probability" : 2,
-        "MAP4305–Intermediate Differential Equations" : 1,
+        "MAD4401 Intro to Numerical Analysis" : 1,
+        "MAP4305 Intermediate Differential Equations" : 1,
         "CIS4930 Data Science in Bioinformatics" : 2
+      },
+      courseGrades: {
+        "CEN3031 Software Engineering" : 'A',
+        "CIS4301 Information and Database Systems" : 'A',
+        "COP3502: Prog. Fundamentals 1 (Java)" : 'A',
+        "MAA4402 Functions of Complex Variables" : 'A-',
+        "MAD4401 Intro to Numerical Analysis" : 'A',
+        "COP3530 Data Structures and Alg." : 'A',
+        "COP3503: Prog. Fundamentals 2 (C++)" : 'A',
+        "COT5615 Math for Intelligent Systems" : 'A-',
+        "CDA3101 Intro Computer Organization" : 'A',
+        "COT3100 Applied Discrete Structures" : 'A',
+        "EEL5840 Fundamentals of Machine Learning" : 'A-',
+        "CNT4007C Computer Networking" : 'A-',
+        "CAP6610 Machine Learning" : 'A-',
+        "STA4321 Fundamentals of Probability" : 'A',
+        "MAP4305 Intermediate Differential Equations" : 'A',
+        "CIS4930 Data Science in Bioinformatics" : 'A',
       }
     }
   },
