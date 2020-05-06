@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="font-sans flex flex-col overflow-y-hidden" ref="app">
     <div class="fixed top-0 h-screen w-screen z-0" style="opacity: 80%">
-      <video autoplay muted id="myVideo" class="w-screen">
+      <video autoplay muted id="myVideo" class="h-screen " style="object-fit: cover">
         <source class="active" src="./assets/earf.mp4" id="vid1" type="video/mp4">
         <source class="inactive" src="./assets/earfR.mp4" id="vid2" type="video/mp4">
 
@@ -34,7 +34,7 @@
 
     </div>
 
-    <div class="w-1/2 mr-auto flex flex-col" style="height: 320vh; z-index:40">
+    <div class="w-3/4 lg:w-1/2 mr-auto flex flex-col" style="height: 320vh; z-index:40">
       <div class="w-full h-screen flex flex-col justify-center" :style="{padding: -scrollDistVal/2 + 'px 0px ' + '0px 0px',}" >
 
         <div class="w-full flex justify-center px-12 " :style="{padding: scrollDistVal + 'px 0px ' + '0px 0px',}">
@@ -51,10 +51,10 @@
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
     data-aos-once="true" class="flex items-baseline justify-start">
-            <p  class="text-2xl font-normal text-white my-3 leading-tight">I'm a  </p>
+            <p  class="text-sm lg:text-2xl font-normal text-white my-3 leading-tight">I'm a  </p>
 
           <vue-typed-js :strings="['Programmer', 'Machine Learning Engineer', 'Data Scientist', 'Mathematician']" :backSpeed="13" :typeSpeed="25" :loop="true" :backDelay="1500" :startDelay="2000"  :showCursor="true" :cursorChar="'|'" >
-            <p class="text-2xl font-normal text-white my-3 leading-tight font-medium ml-2"> <span class="typing"></span> </p>
+            <p class="text-sm lg:text-2xl font-normal text-white my-3 leading-tight font-medium ml-2"> <span class="typing"></span> </p>
           </vue-typed-js>
           </div>
           
@@ -99,7 +99,15 @@
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="true"
-    data-aos-once="false" class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 7rem"> Click on a project </p>
+    data-aos-once="false" class="w-full hidden lg:block text-bold text-white leading-tight" style="font-weight: 700; font-size: 7rem"> Click on a project </p>
+      
+    <p :data-aos="(scrollDist>1.1) ? 'fade-down' : 'fade-up'"
+    data-aos-offset="200"
+    data-aos-delay="0"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="false" class="w-full block lg:hidden text-bold text-white leading-tight text-6xl" style="font-weight: 700;"> Click on a project </p>
 
           <div :data-aos="(scrollDist>1.1) ? 'fade-down' : 'fade-up'"
     data-aos-offset="200"
@@ -111,6 +119,7 @@
             <p  class="text-2xl font-normal text-white my-3 leading-tight">To learn more about what I've made </p>
 
           </div>
+          
           
 
           <div class="flex flex-col justify-between items-baseline">
@@ -131,7 +140,15 @@
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="false"
-    data-aos-once="false" class="w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 6rem"> Scroll to see About Me </p>
+    data-aos-once="false" class="w-full text-bold hidden lg:block text-white leading-tight" style="font-weight: 700; font-size: 6rem"> Scroll to see About Me </p>
+      
+      <p :data-aos="(scrollDist>2) ? 'fade-down' : 'fade-up'"
+    data-aos-offset="200"
+    data-aos-delay="0"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="false"
+    data-aos-once="false" class="w-full text-bold lg:hidden block text-white leading-tight text-6xl" style="font-weight: 700"> Scroll to see About Me </p>
 
           <div :data-aos="(scrollDist>2) ? 'fade-down' : 'fade-up'"
     data-aos-offset="200"
@@ -170,12 +187,12 @@
     </div>
 
     <div class="fixed top-0 w-full flex justify-center items-center  py-3" style="z-index: 1201" >
-        <div  class="container flex items-baseline justify-between" :class="screenState==0 ? 'text-white' : 'text-black'" >
-          <p class="text-xl opacity-75 font-medium cursor-pointer hover:opacity-100" @click="changeState(0)">Chris DiZenzo</p>
+        <div  class="w-full lg:w-3/4 flex items-baseline justify-between" :class="screenState==0 ? 'text-white' : 'text-black'" >
+          <p class="text-md lg:text-xl opacity-75 font-medium cursor-pointer mx-2 lg:mx-0 hover:opacity-100" @click="changeState(0)">Chris DiZenzo</p>
           <div class="flex items-baseline">
-            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8" @click="changeState(1)" >About</p>
-            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8" @click="changeState(2)">Resume</p>
-            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded  py-2 px-4 mx-8" @click="changeState(2)" >Contact</p>
+            <p class="text-sm lg:text-xl opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 lg:mx-8" @click="changeState(1)" >About</p>
+            <p class="text-sm lg:text-xl opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 lg:mx-8" @click="changeState(2)">Resume</p>
+            <p class="text-sm lg:text-xl opacity-75 font-normal cursor-pointer lg:block hidden hover:opacity-100 rounded  py-2 px-4 mx-8" @click="changeState(2)" >Contact</p>
             
           </div>
         </div>
@@ -185,10 +202,10 @@
     <div class="fixed top-0 h-screen w-full flex flex-col " style="z-index: 100" >
       
     <div class="h-screen w-full " style="z-index: 0">
-      <div class="flex w-full h-screen justify-end items-center relative">
+      <div class="w-full flex h-screen justify-end items-center relative">
         
         
-        <div v-if="elemDisplaying!=-1" class="w-1/2 flex items-baseline justify-between text-white" >
+        <div v-if="elemDisplaying!=-1" class="w-1/2 flex items-baseline justify-between text-white" style="z-index: 1000;">
         
           <div v-for="(val,ind) in projects" :key="ind" v-show="elemDisplaying==ind" class="bg-black opacity-75 rounded-lg px-8 py-8">
             <img v-bind:src="require('./assets/projectimages/' + val.images[0])" class="max-w-64 max-h-64 mx-auto" style="max-height: 25rem; max-width: 25rem" alt='no image'/>
@@ -206,7 +223,7 @@
             
           </div>
         </div>
-        <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 5;">
+        <div class="w-1/2 hidden lg:flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 5;">
 
           <div id="mous" ref="mous" class="relative w-full h-full mx-auto" style="height:1000px; max-width: 1000px">
             <!-- <p class="text-white">{{dots[0].x}} , {{dots[0].y}}</p> -->
@@ -221,6 +238,15 @@
               <!-- <img alt="Vue logo" src="./assets/ME.png" style="transform: scale(.1)"> -->
               <!-- <img v-bind:src="require('./assets/' + projects[ind].images[0])" style="border-radius: 15px; height: 60px; width: 100px; padding: 10px;"/> -->
 
+            </div>
+          </div>
+
+        </div>
+        <div class="w-1/4 flex lg:hidden flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 5;">
+
+          <div id="test" class="lg:hidden flex h-full mx-auto flex-col items-center w-full z-10">
+            <div v-for="(val,ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" class="ml-auto flex items-center">
+                <p class="text-md text-white font-medium cursor-pointer my-2 px-2">{{val.name}}</p>
             </div>
           </div>
 
@@ -684,6 +710,7 @@ export default {
 </script>
 
 <style>
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

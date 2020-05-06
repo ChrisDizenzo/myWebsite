@@ -1,8 +1,8 @@
 <template>
     <div class="bg-gray-100 w-full z-10 flex flex-col items-center">
       
-      <div class="container flex flex-col items-center mt-16 h-full w-full z-10">
-        <p class="text-6xl w-full text-normal text-white text-center leading-tight mb-3" style="font-weight: 700;">Resume</p>        
+      <div class="hidden container lg:flex flex-col items-center mt-16 h-full w-full z-10">
+        <p class="text-6xl w-full text-normal text-blue-900 text-center leading-tight mb-3" style="font-weight: 700;">Resume</p>        
         <!-- <img alt="Vue logo" src="../assets/ME.png"> -->
           <!-- <p v-for="(val,ind) in Object.keys(courses)" :key="ind">{{val}}____________{{coursesKey[courses[val]]}}</p> -->
         <div class="flex h-full text-black w-full border border-gray-400 rounded-md">
@@ -175,6 +175,169 @@
             </div>
             
           </div>
+        </div>
+      </div>
+
+      <div class="w-full flex lg:hidden flex-col items-center mt-16 h-full w-full z-10">
+        <p class="text-xl w-full text-normal text-blue-900 text-center leading-tight mb-3" style="font-weight: 700;">Resume</p>        
+        <!-- <img alt="Vue logo" src="../assets/ME.png"> -->
+          <!-- <p v-for="(val,ind) in Object.keys(courses)" :key="ind">{{val}}____________{{coursesKey[courses[val]]}}</p> -->
+        <div class="flex flex-col h-full text-black w-full border border-gray-400 rounded-md">
+
+          <div class="w-full flex items-center bg-blue-900">
+              <img alt="Me !" src="../assets/ME.png" class="h-32 w-1/3 my-4 rounded-full mx-4 border-2 border-white" >
+              <div class="flex flex-col items-center justify-center">
+                <p class="text-lg w-full text-normal text-white text-left leading-tight mb-3" style="font-weight: 700;">Chris DiZenzo</p>        
+                <div class="flex flex-col text-md text-white items-start w-full">
+                  <p class="text-md text-left font-medium w-full my-1">Contact</p>
+                  
+                  <div class="flex items-center">
+
+                    <p class="text-xs font-light text-left w-full leading-tight">(561)-866-0110</p>
+                  </div>
+                  <div class="flex items-center">
+
+                    <p class="text-xs font-light text-left w-full leading-tight">cddizenzo4@gmail.com</p>
+                  </div>
+                  <div class="flex items-center">
+
+                    <p class="text-xs font-light text-left w-full leading-tight">https://www.linkedin.com/in/chrisdizenzo/</p>
+                  </div>
+                  
+                </div>
+                
+              </div>
+              
+          </div>
+          <div class="flex w-full flex-col text-blue-900 px-2">
+              <div class="flex flex-col w-full justify-center border-b-2 border-blue-900 items-center">
+                <div class="flex items-center w-full">
+
+                  <p class="text-xl mt-2 text-left w-full font-medium leading-tight">Education</p>
+
+                </div>
+              </div>
+              <div class="flex flex w-full justify-center items-start mt-1">
+                  <div class="w-3/4 flex flex-col item-start">
+                    <p class="text-xs text-left">UNIVERSITY OF FLORIDA, GAINESVILLE, FL</p>
+                    <p class="text-xs text-left">Pursuing Bachelor of Science in Computer Science	</p>
+                    <p class="text-xs text-left">Completed Minor in Mathematics	</p>
+                    
+
+                  </div>
+                  <div class="w-1/2 flex flex-col item-start">
+                    <p class="text-xs text-right">Graduated: May 2020</p>
+                    <p class="text-xs text-right">Major GPA:  3.83/4.0</p>
+                    <p class="text-xs text-right">Minor GPA:  3.95/4.0	</p>
+                    <p class="text-xs text-right">Cumulative GPA:  3.7/4.0	</p>
+                    
+
+                  </div>
+                  
+              </div>
+              <p class="text-xs uppercase font-bold text-blue-900 mt-2 mb-2">Filter</p>
+
+              <div class="flex items-center ">
+                <div class="text-white rounded-md flex justify-between items-center mb-2 w-full">
+                  <p class="px-3 rounded-full text-xs font-medium border border-blue-900 cursor-pointer mx-2"  style="font-size: 0.5rem" @click="filterMethods(-1)" :class="filter==-1 ? ['bg-blue-900', 'text-white', 'hover:bg-blue-800'] : ['text-blue-900','text-white', 'hover:bg-blue-900', 'hover:text-white']">All</p>
+                  <p v-for="(course, ind) in coursesKey" :key="ind" @click="filterMethods(ind)" class="bg-white border border-blue-900   cursor-pointer font-medium px-3 rounded-full" 
+                  style="font-size: 0.5rem" :class="filter==ind ? ['bg-blue-900', 'text-white', 'hover:bg-blue-800'] : ['text-blue-900','text-white', 'hover:bg-blue-900', 'hover:text-white']">{{course}}</p>
+                </div>
+              </div>
+              <div class="flex flex-col w-full items-center">
+                <div class="w-full flex flex-col items-start">
+                    <p class="text-xs text-left"><b>Relevant Coursework:</b>  </p>
+                    
+                  </div>
+              </div>
+              <div class="flex w-full items-center">
+                <div class="flex flex-wrap w-full  items-center">
+                    <div v-for="(course, ind) in Object.keys(courses)" :key="ind" v-show="filter==-1 || filter==courses[course]" class="w-1/2 flex pr-12 items-baseline">
+                      <p class="text-xs text-blue-900 text-left">{{course}}</p>
+                      <p class="text-xs ml-auto text-blue-900 text-left w-4">{{courseGrades[course]}}</p>
+
+                    </div>
+                    
+                  
+                </div>
+
+              </div>
+              <div class="flex flex-col w-full justify-center border-b-2 border-blue-900 items-center mt-6">
+                <div class="flex items-center w-full">
+
+                  <p class="text-2xl text-left w-full font-medium leading-tight">Experience</p>
+
+                </div>
+              </div>
+              <div class="flex flex w-full justify-center items-start mt-1">
+                  <div class="w-full flex flex-col item-start">
+                    <div class="flex items-baseline justify-between">
+                      <p class="text-xs text-left"> <b>Startup - Event Discovery Platform</b></p>
+                      <p class="text-xs text-left">  January 2020 - Present</p>
+
+                    </div>
+                    <p class="text-xs text-left"> <i>Software Development</i> </p>
+                    
+                    <p class="text-xs ml-6">Created and launched a geocentric iOS app using Swift, SwiftUI, Firebase authentication (for Google and Facebook sign-in), Firestore (NoSQL backend), and Firebase Storage (backend image database).</p>
+                    <p class="text-xs ml-6">Implemented a single-page Web application using Vue.js that deep-links users to the iOS application, allowing users to share information stored in Firestore across devices.</p>
+                    
+
+                  </div>
+                  
+              </div>
+              <div class="flex flex w-full justify-center items-start mt-1">
+                  <div class="w-full flex flex-col item-start">
+                    <div class="flex items-baseline justify-between">
+                      <p class="text-xs text-left"> <b>University of Florida</b></p>
+                      <p class="text-xs text-left">  August 2019 - Present</p>
+
+                    </div>
+                    <p class="text-xs text-left"> <i>Teaching Assistant (Discrete Structures)</i> </p>
+                    
+                    <p class="text-xs ml-6">Led weekly class discussions of over 40 students and developed a practice problem library with solutions in order to enhance students’ understanding of logic, algorithmic complexity, discrete probability, and graphs.</p>
+                    <p class="text-xs ml-6">Provided reviews of coding interview questions in order to enhance connection of subject matter to real world applications, including outlines of how course materials may be applied to fields in computer science - ultimately making the material less discrete from reality.</p>
+                    
+
+                  </div>
+                  
+              </div>
+              <div class="flex flex w-full justify-center items-start mt-1">
+                  <div class="w-full flex flex-col item-start">
+                    <div class="flex items-baseline justify-between">
+                      <p class="text-xs text-left"> <b>University of Florida</b></p>
+                      <p class="text-xs text-left">  August 2019 - Present</p>
+
+                    </div>
+                    <p class="text-xs text-left"> <i>Research Assistant</i> </p>
+                    
+                    <p class="text-xs ml-6">Applied featurization and a ResNet-101 Neural Network to detect explosive hazards from a Markov Ground Region Segmentation System.</p>
+                    <p class="text-xs ml-6">Developed object-detection algorithms including R-CNN, Faster R-CNN, and YOLO</p>
+                    <p class="text-xs ml-6">Created a real-time hand-tracking system, using YOLOv3 on a handmade dataset, capable of detecting positions and gestures of a hand at speeds over 60 frames per second.</p>
+                    
+
+                  </div>
+                  
+              </div>
+              <div class="flex flex w-full justify-center items-start mt-1">
+                  <div class="w-full flex flex-col item-start">
+                    <div class="flex items-baseline justify-between">
+                      <p class="text-sm text-left"> <b>Gator MotorSports </b></p>
+                      <p class="text-sm text-left">  August 2016 - July 2017</p>
+
+                    </div>
+                    <p class="text-sm text-left"> <i>Powertrain Group Lead Assistant</i> </p>
+                    
+                    <p class="text-sm ml-6">Modeled the team’s first full intake, engine, and exhaust wave simulation in Ricardo WAVE.</p>
+                    <p class="text-sm ml-6">Presented wave simulation data to design leads, including optimal valve intake and exhaust timings.</p>
+                    <p class="text-sm ml-6">Designed and manufactured a portable laser alignment system, decreasing alignment time by 50%. </p>
+                    
+
+                  </div>
+                  
+              </div>
+              
+              
+            </div>
         </div>
       </div>
     </div>
