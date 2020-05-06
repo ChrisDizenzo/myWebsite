@@ -22,10 +22,10 @@
     </div>
 
     
-    <div class="fixed top-0 h-screen w-full bg-blue-900" :class="screenState==2 ? 'screenanim' : 'screenanim3'" style="z-index: 1000"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+    <div class="fixed top-0 h-screen w-full bg-blue-600" :class="screenState==2 ? 'screenanim' : 'screenanim3'" style="z-index: 1000"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
 
     </div>
-    <div class="fixed top-0 h-screen w-full screenanim2 bg-blue-600"  style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+    <div class="fixed top-0 h-screen w-full screenanim2 bg-blue-900"  style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
 
     </div>
     <div id="resum" class="fixed top-0 h-screen w-full bg-white " :class="screenState==2 ? 'screenanim3' : 'screenanim'" style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ?  '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
@@ -190,14 +190,20 @@
         
         <div v-if="elemDisplaying!=-1" class="w-1/2 flex items-baseline justify-between text-white" >
         
-          <div v-for="(val,ind) in projects" :key="ind" v-show="elemDisplaying==ind">
-            <p class="text-6xl w-full text-bold text-white leading-tight" style="font-weight: 700; font-size: 6rem">{{val.title}}</p>
-            <ul class="list-inside" style="list-style-position: inside">
+          <div v-for="(val,ind) in projects" :key="ind" v-show="elemDisplaying==ind" class="bg-black opacity-75 rounded-lg px-8 py-8">
+            <img v-bind:src="require('./assets/projectimages/' + val.images[0])" class="max-w-64 max-h-64 mx-auto" style="max-height: 16rem; max-width: 16rem" alt='no image'/>
+
+            <TitleTypeVue :msg="[val.title]" :sDelay="500" :cDelay="5" />
+            <ul data-aos="fade-up"
+    data-aos-offset="200"
+    data-aos-delay="1000"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="false"
+    data-aos-once="false"  class="list-inside" style="list-style-position: inside">
               <li v-for="(desc, ind) in val.description" :key="ind" >{{desc}}</li>
             </ul>
             
-            <h1>{{ val.images[ind] }} </h1>
-            <img v-bind:src="require('./assets/projectimages/' + val.images[0])"  alt='no image'/>
           </div>
         </div>
         <div class="w-1/2 flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 5;">
@@ -389,7 +395,10 @@ export default {
     },
     displayElem(val) {
       if(this.elemDisplaying != val) {
-        this.elemDisplaying = val
+        this.elemDisplaying = -1
+        setTimeout(() => {
+          this.elemDisplaying = val
+        }, 20); 
       }else{
         this.elemDisplaying = -1
       }
