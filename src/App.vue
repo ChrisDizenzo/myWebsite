@@ -28,8 +28,8 @@
     <div class="fixed top-0 h-screen w-full screenanim2"  style="z-index: 1000; background: #0021A5" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
 
     </div>
-    <div id="resum" class="fixed top-0 h-screen w-full bg-white " :class="screenState==2 ? 'screenanim3' : 'screenanim'" style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
-      <Resume  />
+    <div id="resum" class="fixed top-0 h-screen w-full bg-white " :class="screenState==2 ? 'screenanim3' : 'screenanim'" style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ?  '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+      <Resume style="position: absolute" :style="{top: (-1*Math.round((this.scrollDist-3)*windowHeight)) + 'px'}" />
       
 
     </div>
@@ -244,6 +244,7 @@
 
 
     <Contact />
+    <div style="height:10vh;"></div>
   </div>
 </template>
 
@@ -339,18 +340,18 @@ export default {
   },
   methods: {
     changeState(val) {
-      if (val == 0 && this.scrollDist > 2.2){
+      if (val == 0){
         this.scrollDist = 0
         // window.scrollY = 0
         this.prevScroll = 0
         
         
-      } else if(val == 1 && (this.scrollDist > 3 || this.scrollDist < 2.2)){
+      } else if(val == 1){
        
         setTimeout(() =>  this.scrollDist = 2.201, 1300)
         // window.scrollY = Math.round(2.201*window.innerHeight)
         this.prevScroll = Math.round(2.201*window.innerHeight)
-      }else if (val == 2 && this.scrollDist < 3){
+      }else if (val == 2){
         this.scrollDist = 3.001
         // window.scrollY = Math.round(3.001*window.innerHeight)
         this.prevScroll = Math.round(3.001*window.innerHeight)
@@ -407,7 +408,7 @@ export default {
         window.scrollTo(0, this.prevScroll)
         return
       }
-      console.log("tim: ", (Math.round(this.scrollDist100)/100), " John: " , (Math.round(window.scrollY100)/100) , " bob: " , (Math.round(this.prevScroll*100)/100))
+      console.log("tim: ", (Math.round(this.scrollDist*100)/100), " John: " , (Math.round(window.scrollY*100)/100) , " bob: " , (Math.round(this.prevScroll*100)/100))
       this.scrollDist += (window.scrollY-this.prevScroll)/window.innerHeight
       this.prevScroll = window.scrollY
 
@@ -581,6 +582,7 @@ export default {
     },
   },
   mounted(){
+    console.log("tim: ", (Math.round(this.scrollDist*100)/100), " John: " , (Math.round(window.scrollY*100)/100) , " bob: " , (Math.round(this.prevScroll*100)/100))
     console.log(projectsJSON)
     this.windowHeight = window.innerHeight
     console.log(Object.keys(projectsJSON).length)
@@ -660,8 +662,10 @@ export default {
         console.log("Puppy")
       } else if (this.scrollDist > 3 && this.screenState != 2) {
         this.changeState(2)
+        console.log("Puppy")
       } else if (this.scrollDist < 2.2 && this.screenState != 0) {
         this.changeState(0)
+        console.log("Puppy")
       }
     }
   }
@@ -715,6 +719,10 @@ export default {
   transition: background 1s;
 
 }
+/* #resum{
+  position: absolute;
+  overflow-y: auto;
+} */
 
 .hoverable:hover {
   text-decoration:  underline;
