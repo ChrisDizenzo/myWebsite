@@ -404,13 +404,13 @@ export default {
     },
     handleScroll() {
       if(this.animateScreen) {
-        window.scrollTo(0, this.scrollY)
+        window.scrollTo(0, this.prevScroll)
         return
       }
-      console.log("tim: ", (Math.round(this.scrollDist*100)/100), " John: " , (Math.round(window.scrollY*100)/100) , " bob: " , (Math.round(this.prevScroll*100)/100))
+      console.log("tim: ", (Math.round(this.scrollDist100)/100), " John: " , (Math.round(window.scrollY100)/100) , " bob: " , (Math.round(this.prevScroll*100)/100))
       this.scrollDist += (window.scrollY-this.prevScroll)/window.innerHeight
       this.prevScroll = window.scrollY
-      
+
     },
     updateValues(event) {
       this.pointerx = event.pageX-10
@@ -655,11 +655,12 @@ export default {
   },
   watch: {
     scrollDist() {
-      if(this.scrollDist > 2.2 && this.scrollDist<3) {
+      if(this.scrollDist > 2.2 && this.scrollDist<3 && this.screenState != 1) {
         this.changeState(1)
-      } else if (this.scrollDist > 3) {
+        console.log("Puppy")
+      } else if (this.scrollDist > 3 && this.screenState != 2) {
         this.changeState(2)
-      } else if (this.scrollDist < 2.2 && this.screenState == 1) {
+      } else if (this.scrollDist < 2.2 && this.screenState != 0) {
         this.changeState(0)
       }
     }
