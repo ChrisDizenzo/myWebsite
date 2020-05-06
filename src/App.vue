@@ -175,7 +175,7 @@
           <div class="flex items-baseline">
             <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8" @click="changeState(1)" >About</p>
             <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded py-2 px-4 mx-8" @click="changeState(2)">Resume</p>
-            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded  py-2 px-4 mx-8" >Contact</p>
+            <p class="text-md opacity-75 font-normal cursor-pointer hover:opacity-100 rounded  py-2 px-4 mx-8" @click="changeState(2)" >Contact</p>
             
           </div>
         </div>
@@ -250,7 +250,7 @@
 
 
     <Contact />
-    <div style="height:10vh;"></div>
+    <div style="height:20vh;"></div>
   </div>
 </template>
 
@@ -346,38 +346,40 @@ export default {
   },
   methods: {
     changeState(val) {
-      if (val == 0){
-        this.scrollDist = 0
-        // window.scrollY = 0
-        this.prevScroll = 0
+      if (!this.animateScreen){
+        if (val == 0){
+          this.scrollDist = 0
+          // window.scrollY = 0
+          this.prevScroll = 0
+          
+          
+        } else if(val == 1){
         
+          setTimeout(() =>  this.scrollDist = 2.201, 1300)
+          // window.scrollY = Math.round(2.201*window.innerHeight)
+          this.prevScroll = Math.round(2.201*window.innerHeight)
+        }else if (val == 2){
+          this.scrollDist = 3.001
+          // window.scrollY = Math.round(3.001*window.innerHeight)
+          this.prevScroll = Math.round(3.001*window.innerHeight)
+        }
         
-      } else if(val == 1){
-       
-        setTimeout(() =>  this.scrollDist = 2.201, 1300)
-        // window.scrollY = Math.round(2.201*window.innerHeight)
-        this.prevScroll = Math.round(2.201*window.innerHeight)
-      }else if (val == 2){
-        this.scrollDist = 3.001
-        // window.scrollY = Math.round(3.001*window.innerHeight)
-        this.prevScroll = Math.round(3.001*window.innerHeight)
-      }
-      
-      if(this.screenState<val) { 
-        setTimeout(() => {
-          window.scrollTo(0,this.prevScroll)
-        }, 1300)
-      } else {
-        setTimeout(() => {
-          window.scrollTo(0,this.prevScroll)
-        }, 50)
-      }
-      
-      this.animateScreen = true
-      setTimeout(() => this.animateScreen = false, 1300)
+        if(this.screenState<val) { 
+          setTimeout(() => {
+            window.scrollTo(0,this.prevScroll)
+          }, 1300)
+        } else {
+          setTimeout(() => {
+            window.scrollTo(0,this.prevScroll)
+          }, 50)
+        }
+        
+        this.animateScreen = true
+        setTimeout(() => this.animateScreen = false, 1300)
 
-      // console.log("tim: ", (Math.round(this.scrollDist*100)/100), " tim: " , (Math.round(window.scrollY*100)/100) , " tim: " , (Math.round(this.prevScroll*100)/100))
-      this.screenState = val
+        // console.log("tim: ", (Math.round(this.scrollDist*100)/100), " tim: " , (Math.round(window.scrollY*100)/100) , " tim: " , (Math.round(this.prevScroll*100)/100))
+        this.screenState = val
+      }
       
         
 

@@ -31,7 +31,7 @@
         "titleL": "Formula Society of Automotive Engineers Competition team",
         "tags":["iOS Development", "Frontend Development"],
         "description": ["An iOS application made for the University of Miami Emergency Residency program at Jackson Memorial Hospital in Miami, FL"],
-        "images": ["realAppeal.png"],
+        "images": ["ultrasound.png"],
         "link" : ""
     },
     "WebcamML":{
