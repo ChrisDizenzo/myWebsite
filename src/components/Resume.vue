@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen bg-gray-100 w-full z-10 flex flex-col items-center">
+    <div class="bg-gray-100 w-full z-10 flex flex-col items-center">
       
       <div class="container flex flex-col items-center mt-16 h-full w-full z-10">
         <p class="text-6xl w-full text-normal text-white text-center leading-tight mb-3" style="font-weight: 700;">Resume</p>        

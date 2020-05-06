@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="font-sans flex flex-col overflow-y-hidden" ref="app">
-    <div class="fixed top-0 h-screen w-screen z-0 opacity-50">
+    <div class="fixed top-0 h-screen w-screen z-0" style="opacity: 80%">
       <video autoplay muted id="myVideo" class="w-screen">
         <source class="active" src="./assets/earf.mp4" id="vid1" type="video/mp4">
         <source class="inactive" src="./assets/earfR.mp4" id="vid2" type="video/mp4">
@@ -9,10 +9,10 @@
     </div>
     
     
-    <div class="fixed top-0 h-screen w-full" :class="screenState==1 ? 'screenanim' : 'screenanim3'" style="z-index: 1000; background: #FA4616"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
+    <div class="fixed top-0 h-screen w-full bg-blue-900" :class="screenState==1 ? 'screenanim' : 'screenanim3'" style="z-index: 1000"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
 
     </div>
-    <div class="fixed top-0 h-screen w-full screenanim2"  style="z-index: 1000; background: #0021A5" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
+    <div class="fixed top-0 h-screen w-full screenanim2 bg-blue-600"  style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
 
     </div>
     <div id="abt" class="fixed top-0 h-screen w-full bg-white " :class="screenState==1 ? 'screenanim3' : 'screenanim'" style="z-index: 1000" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
@@ -22,10 +22,10 @@
     </div>
 
     
-    <div class="fixed top-0 h-screen w-full" :class="screenState==2 ? 'screenanim' : 'screenanim3'" style="z-index: 1000; background: #FA4616"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+    <div class="fixed top-0 h-screen w-full bg-blue-900" :class="screenState==2 ? 'screenanim' : 'screenanim3'" style="z-index: 1000"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
 
     </div>
-    <div class="fixed top-0 h-screen w-full screenanim2"  style="z-index: 1000; background: #0021A5" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+    <div class="fixed top-0 h-screen w-full screenanim2 bg-blue-600"  style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
 
     </div>
     <div id="resum" class="fixed top-0 h-screen w-full bg-white " :class="screenState==2 ? 'screenanim3' : 'screenanim'" style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ?  '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
@@ -37,7 +37,7 @@
     <div class="w-1/2 mr-auto flex flex-col" style="height: 320vh; z-index:40">
       <div class="w-full h-screen flex flex-col justify-center" :style="{padding: -scrollDistVal/2 + 'px 0px ' + '0px 0px',}" >
 
-        <div class="w-full flex justify-center " :style="{padding: scrollDistVal + 'px 0px ' + '0px 0px',}">
+        <div class="w-full flex justify-center px-12 " :style="{padding: scrollDistVal + 'px 0px ' + '0px 0px',}">
           <div v-if="elemDisplaying==-1" class="px-2 flex flex-col items-start pointer-events-auto" style="width:90%" :style="{opacity: ((scrollDist+1)*(scrollDist-0.5) *-2)}">
           <TitleTypeVue :msg="['Hello,']" :sDelay="500" :cDelay="5" />
           <TitleTypeVue :msg="['I\'m Chris!']" :sDelay="1500" :cDelay="400" :typeFade="true"/>
@@ -184,7 +184,7 @@
 
     <div class="fixed top-0 h-screen w-full flex flex-col " style="z-index: 100" >
       
-    <div class="h-screen w-full -mt-16 " style="z-index: 0">
+    <div class="h-screen w-full " style="z-index: 0">
       <div class="flex w-full h-screen justify-end items-center relative">
         
         
