@@ -681,7 +681,7 @@ export default {
     this.checkMaxRadius()
     setTimeout(() => this.rotate(), 30)
     setTimeout(() => this.sphereLoad = true, this.sphereLoadTime)
-    setTimeout(() => this.updateRadius() , this.sphereLoadTime)
+    setTimeout(() => this.updateRadius() , 550)
     setTimeout(() =>{
       this.height = document.getElementById('mous').clientHeight
       this.width = document.getElementById('mous').clientWidth

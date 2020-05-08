@@ -2,7 +2,7 @@
     "Hubbub":{
         "titleL": "Startup - Event Discovery Platform",
         "tags":["Frontend Development", "Backend Development", "Data Science", "iOS Development"],
-        "description": [ "Modeled the team’s first full intake, engine, and exhaust wave simulation in Ricardo WAVE.", "Presented wave simulation data to design leads, including optimal valve intake and exhaust timings.", "Designed and manufactured a portable laser alignment system, decreasing alignment time by 50%."],
+        "description": [ "Created and launched a geocentric iOS app using Swift, SwiftUI, Firebase authentication (for Google and Facebook sign-in), Firestore (NoSQL backend), and Firebase Storage (backend image database).", "Implemented a single-page Web application using Vue.js that deep-links users to the iOS application, allowing users to share information stored in Firestore across devices."],
         "images": ["HubbubClicked.png"],
         "link" : ""
     },
@@ -23,7 +23,7 @@
     "realAppeal":{
         "titleL": "Startup - Event Discovery Platform",
         "tags":["Frontend Development", "Backend Development"],
-        "description": [ "Description"],
+        "description": [ "real-appeal.com","In collaboration with two UCLA MBA students, I created a fully launched website and form submission system.", "The website allows people to save money on their taxes, through an application process."],
         "images": ["realAppeal.png"],
         "link" : ""
     },
@@ -37,7 +37,7 @@
     "WebcamML":{
         "titleL": "Realtime Hand Recognition System",
         "tags":["Frontend Development", "Backend Development", "Machine Learning", "Data Science"],
-        "description":["A website to collect data for labeled hand images.", "Data pipelining and manipulation to increase robustness", "Created realtime hand recognition system using YOLOv3 architecture."],
+        "description":["webcamML.chrisdizenzo.com","A website to collect data for labeled hand images.", "Data pipelining and manipulation to increase robustness", "Created realtime hand recognition system using YOLOv3 architecture."],
         "images": ["webcamMLFixed.png"],
         "link" : ""
     },

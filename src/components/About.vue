@@ -11,15 +11,15 @@
       <div class="w-full lg:w-3/4 lg:container flex flex-col lg:flex-row items-center lg:mt-20 z-10">
         <div class="w-full lg:w-1/2 flex flex-col rounded-t-md lg:rounded-md bg-blue-900 text-white px-2 lg:px-8 py-4 mx-2 lg:mx-6">
           <p class="text-xl lg:text-2xl text-left font-medium w-full mb-3">About Me</p>
-          <p class="text-sm lg:text-md font-normal text-left w-full">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <br> <br> It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p class="text-sm lg:text-md font-normal text-left w-full"> I am a graduate from Boca Raton Community High school and The University of Florida. Throughout my years in education I loved to learn and I loved to apply myself. Nothing made me happier than finding new challenges and overcoming them. From welding and milling as a mechanical engineering to implementing the newest neural network architectures to make a hand-detection device, I enjoyed having hard problems, and finding great solutions. If I had one major skill, its to learn quickly and adapt to new environments. <br> <br> On the otherhand, there is one thing I am bad at, and it is using words to best represent myself. I am a very competent communicator in person, in meetings, and over the phone, but I never seem to use the right words when typing about myself or what I have accomplished. It has been an area of constant improvement over the past 6 years, that I am still working to correct. So I hope you forgive any poor wording, or rudimentary english <br><br>Thank you for taking the time to visit my website!</p>
           
         </div>
         <div class="w-full lg:w-1/2 flex flex-col rounded-b-md lg:rounded-md bg-blue-900 text-white px-2 lg:px-8 py-4 mx-2 mx-6">
           <p class="text-xl lg:text-2xl text-left font-medium w-full mb-3">For fun</p>
-          <p class="text-sm lg:text-md font-normal text-left w-full">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+          <p class="text-sm lg:text-md font-normal text-left w-full">I relax by casually learning. I learn by playing competetive sports. The competition is fun, exciting, and full of improvement. I learn by taking up new hobbies like cooking or playing instruments. Ever since I was little I was playing music, so I love to represent myself with a diverse set of instruments. Lastly, I learn by reading. I mostly use books to relax while I'm on the beach. I am very much a beach person if you couldn't tell by the color choice.</p>
           
           <div class="flex flex-wrap w-full mt-4">
-            <p v-for="(fun,ind) in funs" :key="ind" :class="backgCalc(ind)" class="lg:w-1/5 text-center  mx-2 rounded-full text-xs lg:text-sm border border-white-900 cursor-pointer text-white hover:bg-blue-800">{{fun}}</p>
+            <p v-for="(fun,ind) in funs" :key="ind" :class="backgCalc(ind)" class="lg:w-1/5 text-center my-2 mx-2 rounded-full text-xs lg:text-sm border border-white-900 cursor-pointer text-white hover:bg-blue-800">{{fun}}</p>
 
           </div>
 
@@ -37,7 +37,7 @@ export default {
             email: contactInfo['email'],
             linkedin: contactInfo['linkedin'],
             phoneNumber: contactInfo['phoneNumber'],
-            funs: ['Soccer', 'Volleyball', 'Guitar', 'Pasta'],
+            funs: ['Soccer', 'Volleyball', 'Cooking' ,'Guitar', 'Basketball', 'Frisbee','Reading', 'Teaching'],
         }
     },
     methods: {

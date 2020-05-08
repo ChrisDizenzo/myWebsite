@@ -14,8 +14,8 @@
               </div>
 
               <div class="flex flex-col items-start w-full px-5 mb-6">
-                <p class="text-2xl text-left font-medium w-full mb-3">About Me</p>
-                <p class="text-md font-light text-left w-full">I'm a good lad and I like long walks on sandy beaches. Don't even get me started on eating pasta.</p>
+                <!-- <p class="text-2xl text-left font-medium w-full mb-3">About Me</p> -->
+                <!-- <p class="text-md font-light text-left w-full">I'm a good lad and I like long walks on sandy beaches. Don't even get me started on eating pasta.</p> -->
                 
               </div>
 
@@ -55,7 +55,7 @@
               <div class="flex flex w-full justify-center items-start mt-1">
                   <div class="w-3/4 flex flex-col item-start">
                     <p class="text-sm text-left">UNIVERSITY OF FLORIDA, GAINESVILLE, FL</p>
-                    <p class="text-sm text-left">Pursuing Bachelor of Science in Computer Science	</p>
+                    <p class="text-sm text-left">Bachelor of Science in Computer Science	</p>
                     <p class="text-sm text-left">Completed Minor in Mathematics	</p>
                     
 
@@ -364,7 +364,7 @@ export default {
         "MAP4305 Intermediate Differential Equations" : 2,
         "STA4321 Fundamentals of Probability" : 1,
         "MAD4401 Intro to Numerical Analysis" : 2,
-        "MAA4403 Functions of Complex Variables" : 2,
+        "MAA4402 Functions of Complex Variables" : 2,
         "CIS4930 Data Science in Bioinformatics" : 1,
         "COT5615 Math for Intelligent Systems" : 1,
         "EEL5840 Fundamentals of Machine Learning" : 1,
