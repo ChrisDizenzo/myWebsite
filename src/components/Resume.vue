@@ -24,16 +24,18 @@
                 <p class="text-2xl text-left font-medium w-full my-1">Contact</p>
                 
                 <div class="flex items-center my-2">
+                  <font-awesome-icon :icon="['fas', 'phone-square-alt']" size="2x" class="mr-4"/>
 
                   <p class="text-md font-light text-left w-full leading-tight">(561)-866-0110</p>
                 </div>
                 <div class="flex items-center my-2">
-
+                  <font-awesome-icon :icon="['fas', 'envelope-square']" size="2x" class="mr-4"/>
                   <p class="text-md font-light text-left w-full leading-tight">cddizenzo4@gmail.com</p>
                 </div>
                 <div class="flex items-center my-2">
+                    <font-awesome-icon :icon="['fab', 'linkedin']" size="2x" class="mr-4"/>
 
-                  <p class="text-md font-light text-left w-full leading-tight">https://www.linkedin.com/in/chrisdizenzo/</p>
+                  <a onclick="window.open(this.href); return false;" href="https://www.linkedin.com/in/chrisdizenzo/" class="text-md font-light text-left text-blue-500 underline cursor-pointer w-full leading-tight">https://www.linkedin.com/in/chrisdizenzo/</a>
                 </div>
                 
               </div>
@@ -193,14 +195,16 @@
                   <p class="text-md text-left font-medium w-full my-1">Contact</p>
                   
                   <div class="flex items-center">
-
+                    <font-awesome-icon :icon="['fas', 'phone-square-alt']" />
                     <p class="text-xs font-light text-left w-full leading-tight">(561)-866-0110</p>
                   </div>
                   <div class="flex items-center">
-
+                    <font-awesome-icon :icon="['fas', 'envelope-square']" />
+                    
                     <p class="text-xs font-light text-left w-full leading-tight">cddizenzo4@gmail.com</p>
                   </div>
                   <div class="flex items-center">
+                    <font-awesome-icon :icon="['fab', 'fa-linked-in']" />
 
                     <p class="text-xs font-light text-left w-full leading-tight">https://www.linkedin.com/in/chrisdizenzo/</p>
                   </div>
