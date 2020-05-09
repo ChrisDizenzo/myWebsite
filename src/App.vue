@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="font-sans flex flex-col overflow-y-hidden" ref="app">
-    <div class="fixed top-0 h-screen w-screen z-0" style="opacity: 80%">
-      <video autoplay muted id="myVideo" class="h-screen " style="object-fit: cover">
+    <div class="fixed bottom-0 h-screen w-screen z-0" style="opacity: 80%">
+      <video autoplay muted id="myVideo" class="w-screen h-screen " style="object-fit: cover">
         <source class="active" src="./assets/earf.mp4" id="vid1" type="video/mp4">
         <source class="inactive" src="./assets/earfR.mp4" id="vid2" type="video/mp4">
 

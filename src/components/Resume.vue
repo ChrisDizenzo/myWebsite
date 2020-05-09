@@ -10,7 +10,8 @@
               <img alt="Me !" src="../assets/ME.png" class="h-64 w-64 rounded-full my-8 border-2 border-white" >
 
               <div class="px-6 py-2 mb-5 bg-blue-600 hover:bg-blue-700 text-black hover:shadow-md rounded cursor-pointer">
-                <p class="text-md text-white">Download as pdf</p>
+                <a class="text-md text-white hover:cursor-pointer" href="https://drive.google.com/uc?id=1omZnbeJmNgblTSyY86jdBdlCcaRNV6pZ&export=download" download>Download as pdf</a>
+                <!-- <link rel="preload" do="<%= BASE_URL %>CDizenzoResume.pdf"> -->
               </div>
 
               <div class="flex flex-col items-start w-full px-5 mb-6">
@@ -344,7 +345,6 @@
 </template>
 
 <script>
-
 
 export default {
   name: "About",
