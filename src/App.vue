@@ -288,6 +288,8 @@ import TitleTypeVue from './components/TItleTypeVue'
 import About from './components/About'
 import Resume from './components/Resume'
 import Contact from './components/Contact'
+import db from './components/firebaseInit'
+
 export default {
   name: 'App',
   components: {
@@ -347,6 +349,14 @@ export default {
       projects: [],
       updateTime: 30,
 
+      change: 0,
+      testing: 0,
+      addie: "0.0.0.0.0",
+      statesKeys: [],
+      states: [],
+      pages:[1,0,0],
+      docID: "",
+
 
       dots: [
         {
@@ -381,16 +391,25 @@ export default {
           // window.scrollY = 0
           this.prevScroll = 0
           
+          // console.log("Puppy")
+          this.change = 1
+          this.pages[0] +=1
           
         } else if(val == 1){
         
           setTimeout(() =>  this.scrollDist = 2.201, 1300)
           // window.scrollY = Math.round(2.201*window.innerHeight)
           this.prevScroll = Math.round(2.201*window.innerHeight)
+          
+          this.change = 1
+          this.pages[1] +=1
         }else if (val == 2){
           this.scrollDist = 3.001
           // window.scrollY = Math.round(3.001*window.innerHeight)
           this.prevScroll = Math.round(3.001*window.innerHeight)
+          
+          this.change = 1
+          this.pages[2] +=1
         }
         
         if(this.screenState<val) { 
@@ -425,10 +444,12 @@ export default {
         
     },
     displayElem(val) {
-      if(this.elemDisplaying != val) {
+      if(this.elemDisplaying != val && val != -1) {
         this.elemDisplaying = -1
         setTimeout(() => {
           this.elemDisplaying = val
+          this.states[val] += 1
+          this.change = 1
         }, 20); 
       }else{
         this.elemDisplaying = -1
@@ -448,7 +469,7 @@ export default {
         window.scrollTo(0, this.prevScroll)
         return
       }
-      console.log("tim: ", (Math.round(this.scrollDist*100)/100), " John: " , (Math.round(window.scrollY*100)/100) , " bob: " , (Math.round(this.prevScroll*100)/100))
+      // console.log("tim: ", (Math.round(this.scrollDist*100)/100), " John: " , (Math.round(window.scrollY*100)/100) , " bob: " , (Math.round(this.prevScroll*100)/100))
       this.scrollDist += (window.scrollY-this.prevScroll)/window.innerHeight
       this.prevScroll = window.scrollY
 
@@ -543,7 +564,7 @@ export default {
       }
       this.dots[1].x = this.$refs['mous'].clientWidth/2-50
       this.dots[1].y = this.$refs['mous'].clientHeight/2-25
-      console.log("Centerx: " , this.dots[1].x ," Centery: ",this.dots[1].y)
+      // console.log("Centerx: " , this.dots[1].x ," Centery: ",this.dots[1].y)
     },
     bezierFunc(t) {
       let hold = 1-t
@@ -620,13 +641,61 @@ export default {
             }
             return result;
     },
+    getIP(){
+      fetch('https://api.ipify.org?format=json')
+      .then(x => x.json())
+      .then(({ ip }) => {
+          this.addie = ip;
+          // console.log(this.addie)
+      })
+      .catch(()=>{
+        // console.log("This broke, but i tried")
+        this.addie="1.1.1.1.1"
+      })
+    },
+    pushData(){
+      if (this.change == 1){
+        // console.log(this.pages)
+        // console.log(this.docID)
+        // console.log(this.states)
+        var puppy = {}
+        if (this.docID.length == 0){
+          puppy.addie = this.addie
+          puppy.pages = this.pages
+          puppy.states = this.states
+          puppy.statesKeys = this.statesKeys
+          if (this.testing==0){
+            db.collection("Users").add(puppy)
+            .then((docRef) => {
+              this.docID = docRef.id;
+              // console.log(this.docID)
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
+          }
+        }else{
+          puppy.pages = this.pages
+          puppy.states = this.states
+          if (this.testing==0){
+            db.collection("Users").doc(this.docID).set(puppy,{merge: true})
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
+          }
+        }
+      }
+      this.change = 0
+      setTimeout(() => this.pushData() , 3000)
+    }
   },
   mounted(){
-    console.log("tim: ", (Math.round(this.scrollDist*100)/100), " John: " , (Math.round(window.scrollY*100)/100) , " bob: " , (Math.round(this.prevScroll*100)/100))
-    console.log(projectsJSON)
+    this.getIP()
+    // console.log("tim: ", (Math.round(this.scrollDist*100)/100), " John: " , (Math.round(window.scrollY*100)/100) , " bob: " , (Math.round(this.prevScroll*100)/100))
+    // console.log(projectsJSON)
     this.windowHeight = window.innerHeight
     window.scrollTo(0,0);
-    console.log(Object.keys(projectsJSON).length)
+    // console.log(Object.keys(projectsJSON).length)
     var temp = {}
     var rando = {}
     document.addEventListener('scroll', this.handleScroll)
@@ -664,8 +733,10 @@ export default {
       project = {}
       project = projectsJSON[Object.keys(projectsJSON)[i]]
       project.title = Object.keys(projectsJSON)[i]
-      console.log(project)
+      // console.log(project)
       this.projects.push(project)
+      this.statesKeys.push(project.title)
+      this.states.push(0)
       temp = {}
       temp.name = Object.keys(projectsJSON)[i]
       // rando = this.randomAxisXYZ()
@@ -678,7 +749,7 @@ export default {
       temp.r = Math.round(Math.random()*255)
       temp.g = Math.round(Math.random()*255)
       temp.b = Math.round(Math.random()*255)
-      console.log(temp.name)
+      // console.log(temp.name)
       this.dots.push(temp)
     }
     this.checkMaxRadius()
@@ -686,6 +757,7 @@ export default {
     setTimeout(() => this.canAnimate=1, 10)
     setTimeout(() => this.sphereLoad = true, this.sphereLoadTime)
     setTimeout(() => this.updateRadius() , 500)
+    setTimeout(() => this.pushData() , 1000)
     // this.updateRadius()
     setTimeout(() =>{
       this.height = document.getElementById('mous').clientHeight
@@ -702,13 +774,15 @@ export default {
     scrollDist() {
       if(this.scrollDist > 2.2 && this.scrollDist<3 && this.screenState != 1) {
         this.changeState(1)
-        console.log("Puppy")
+        // console.log("Puppy")
+        this.displayElem(this.elemDisplaying)
       } else if (this.scrollDist > 3 && this.screenState != 2) {
         this.changeState(2)
-        console.log("Puppy")
+        // console.log("Puppy")
+        this.displayElem(this.elemDisplaying)
       } else if (this.scrollDist < 2.2 && this.screenState != 0) {
         this.changeState(0)
-        console.log("Puppy")
+        this.displayElem(this.elemDisplaying)
       }
     }
   }

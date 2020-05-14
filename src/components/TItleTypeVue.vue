@@ -32,9 +32,9 @@ export default {
         }
     },
     mounted() {
-        console.log('creebo', this.cursorShow)
+        // console.log('creebo', this.cursorShow)
         setTimeout(() => this.cursorShow = true, this.sDelay-500)
-        console.log('creebo', this.cursorShow)
+        // console.log('creebo', this.cursorShow)
 
     }
 }

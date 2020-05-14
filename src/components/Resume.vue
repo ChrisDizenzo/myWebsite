@@ -110,8 +110,24 @@
               <div class="flex flex w-full justify-center items-start mt-1">
                   <div class="w-full flex flex-col item-start">
                     <div class="flex items-baseline justify-between">
+                      <p class="text-sm text-left"> <b>Startup - realAppeal </b></p>
+                      <p class="text-sm text-left">  April 2020 - Present</p>
+
+                    </div>
+                    <p class="text-sm text-left"> <i>Full-stack Developer</i> </p>
+                    
+                    <p class="text-sm ml-6">Consulted with team managers to advise on best fitting website architecture to meet the companies’ needs.</p>
+                    <p class="text-sm ml-6">I designed and created the front-end and back-end for a beta version of the realAppeal website. Functionalities included: Responsive web design,High quality animations, and a real-time cloud-based noSQL database.</p>
+                    
+
+                  </div>
+                  
+              </div>
+              <div class="flex flex w-full justify-center items-start mt-1">
+                  <div class="w-full flex flex-col item-start">
+                    <div class="flex items-baseline justify-between">
                       <p class="text-sm text-left"> <b>Startup - Event Discovery Platform</b></p>
-                      <p class="text-sm text-left">  January 2020 - Present</p>
+                      <p class="text-sm text-left">  January 2020 - April 2020</p>
 
                     </div>
                     <p class="text-sm text-left"> <i>Software Development</i> </p>
@@ -156,23 +172,7 @@
                   </div>
                   
               </div>
-              <div class="flex flex w-full justify-center items-start mt-1">
-                  <div class="w-full flex flex-col item-start">
-                    <div class="flex items-baseline justify-between">
-                      <p class="text-sm text-left"> <b>Gator MotorSports </b></p>
-                      <p class="text-sm text-left">  August 2016 - July 2017</p>
-
-                    </div>
-                    <p class="text-sm text-left"> <i>Powertrain Group Lead Assistant</i> </p>
-                    
-                    <p class="text-sm ml-6">Modeled the team’s first full intake, engine, and exhaust wave simulation in Ricardo WAVE.</p>
-                    <p class="text-sm ml-6">Presented wave simulation data to design leads, including optimal valve intake and exhaust timings.</p>
-                    <p class="text-sm ml-6">Designed and manufactured a portable laser alignment system, decreasing alignment time by 50%. </p>
-                    
-
-                  </div>
-                  
-              </div>
+              
               
               
             </div>
@@ -188,7 +188,7 @@
         <div class="flex flex-col h-full text-black w-full border border-gray-400 rounded-md">
 
           <div class="w-full flex items-center bg-blue-900">
-              <img alt="Me !" src="../assets/ME.png" class="h-32 w-1/3 my-4 rounded-full mx-4 border-2 border-white" >
+              <img alt="Me !" src="../assets/ME.png" class="h-32 w-auto my-4 rounded-full mx-4 border-2 border-white" >
               <div class="flex flex-col items-center justify-center">
                 <p class="text-lg w-full text-normal text-white text-left leading-tight mb-3" style="font-weight: 700;">Chris DiZenzo</p>        
                 <div class="flex flex-col text-md text-white items-start w-full">
@@ -225,7 +225,7 @@
               <div class="flex flex w-full justify-center items-start mt-1">
                   <div class="w-3/4 flex flex-col item-start">
                     <p class="text-xs text-left">UNIVERSITY OF FLORIDA, GAINESVILLE, FL</p>
-                    <p class="text-xs text-left">Pursuing Bachelor of Science in Computer Science	</p>
+                    <p class="text-xs text-left">Bachelor of Science in Computer Science</p>
                     <p class="text-xs text-left">Completed Minor in Mathematics	</p>
                     
 
@@ -277,6 +277,22 @@
               <div class="flex flex w-full justify-center items-start mt-1">
                   <div class="w-full flex flex-col item-start">
                     <div class="flex items-baseline justify-between">
+                      <p class="text-sm text-left"> <b>Startup - realAppeal </b></p>
+                      <p class="text-sm text-left">  April 2020 - Present</p>
+
+                    </div>
+                    <p class="text-sm text-left"> <i>Full-stack Developer</i> </p>
+                    
+                    <p class="text-sm ml-6">Consulted with team managers to advise on best fitting website architecture to meet the companies’ needs.</p>
+                    <p class="text-sm ml-6">I designed and created the front-end and back-end for a beta version of the realAppeal website. Functionalities included: Responsive web design,High quality animations, and a real-time cloud-based noSQL database.</p>
+                    
+
+                  </div>
+                  
+              </div>
+              <div class="flex flex w-full justify-center items-start mt-1">
+                  <div class="w-full flex flex-col item-start">
+                    <div class="flex items-baseline justify-between">
                       <p class="text-xs text-left"> <b>Startup - Event Discovery Platform</b></p>
                       <p class="text-xs text-left">  January 2020 - Present</p>
 
@@ -323,24 +339,6 @@
                   </div>
                   
               </div>
-              <div class="flex flex w-full justify-center items-start mt-1">
-                  <div class="w-full flex flex-col item-start">
-                    <div class="flex items-baseline justify-between">
-                      <p class="text-sm text-left"> <b>Gator MotorSports </b></p>
-                      <p class="text-sm text-left">  August 2016 - July 2017</p>
-
-                    </div>
-                    <p class="text-sm text-left"> <i>Powertrain Group Lead Assistant</i> </p>
-                    
-                    <p class="text-sm ml-6">Modeled the team’s first full intake, engine, and exhaust wave simulation in Ricardo WAVE.</p>
-                    <p class="text-sm ml-6">Presented wave simulation data to design leads, including optimal valve intake and exhaust timings.</p>
-                    <p class="text-sm ml-6">Designed and manufactured a portable laser alignment system, decreasing alignment time by 50%. </p>
-                    
-
-                  </div>
-                  
-              </div>
-              
               
             </div>
         </div>
