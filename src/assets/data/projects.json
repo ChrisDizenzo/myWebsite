@@ -3,7 +3,7 @@
         "titleL": "Startup - Event Discovery Platform",
         "tags":["Frontend Development", "Backend Development", "Data Science", "iOS Development"],
         "description": [ "Created and launched a geocentric iOS app using Swift, SwiftUI, Firebase authentication (for Google and Facebook sign-in), Firestore (NoSQL backend), and Firebase Storage (backend image database).", "Implemented a single-page Web application using Vue.js that deep-links users to the iOS application, allowing users to share information stored in Firestore across devices."],
-        "images": ["HubbubClicked.png"],
+        "images": ["hubbub.gif"],
         "link" : ""
     },
     "Gator Motorsports":{
@@ -23,15 +23,15 @@
     "realAppeal":{
         "titleL": "Startup - Event Discovery Platform",
         "tags":["Frontend Development", "Backend Development"],
-        "description": [ "real-appeal.com","In collaboration with two UCLA MBA students, I created a fully launched website and form submission system.", "The website allows people to save money on their taxes, through an application process."],
-        "images": ["realAppeal.png"],
+        "description": [ "Visit www.real-appeal.com","In collaboration with students from the UCLA Masters in Business Admnistration program, I created the front and back end of their website.", "The site provides customers an animated application process that pushes their form data to a NoSQL cloud firestore database."],
+        "images": ["realAppeal.gif"],
         "link" : ""
     },
     "Ultrasound App": {
         "titleL": "Formula Society of Automotive Engineers Competition team",
         "tags":["iOS Development", "Frontend Development"],
         "description": ["An iOS application made for the University of Miami Emergency Residency program at Jackson Memorial Hospital in Miami, FL"],
-        "images": ["ultrasound.png"],
+        "images": ["ultrasound.gif"],
         "link" : ""
     },
     "WebcamML":{
@@ -39,13 +39,14 @@
         "tags":["Frontend Development", "Backend Development", "Machine Learning", "Data Science"],
         "description":["webcamML.chrisdizenzo.com","A website to collect data for labeled hand images.", "Data pipelining and manipulation to increase robustness", "Created realtime hand recognition system using YOLOv3 architecture."],
         "images": ["webcamMLFixed.png"],
+        "video" : "handML.mp4",
         "link" : ""
     },
     "myWebsite":{
         "titleL": "Your Here Now!",
         "tags":["Frontend Development", "Applied Mathmatics"],
         "description":["The movement of the Sphere is calculated by converting the mouse position to principal axes rotations.","The distribution of the points across the sphere surface is a replication of the Spherical Fibonacci Spiral."],
-        "images": ["myWebsite.png"],
+        "images": ["myWebsite.gif"],
         "link" : ""
     },
     "UF TA'ing":{
@@ -59,14 +60,14 @@
         "titleL": "Machine Learning to play 2048",
         "tags":["Frontend Development", "Backend Development", "Machine Learning", "Data Science"],
         "description":["A website to collect data for labeled 2048 games", "Data pipelining and manipulation to increase robustness", "Created a Machine Learning algorithm using pytorch to play the 2048 game."],
-        "images": ["2048.png"],
+        "images": ["2048ML.gif"],
         "link" : ""
     },
     "KartingML":{
         "titleL": "Machine Learning to drive around a racetrack in Unity",
         "tags":["Machine Learning"],
         "description":["Applied autodynamics from GatorMotorsports to create a drivable racecar in Unity.", "Using raycasting, the computer could see the track, and could control the accelaration and turning angle.","Used a genetic algorithm package (ML-Agents) to teach a computer to drive around a racetrack."],
-        "images": ["uf-logo.png"],
+        "images": ["machineKarting.gif"],
         "link" : ""
     }
 }

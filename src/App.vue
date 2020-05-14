@@ -3,32 +3,31 @@
     <div class="fixed bottom-0 h-screen w-screen z-0" style="opacity: 80%">
       <video autoplay muted id="myVideo" class="w-screen h-screen " style="object-fit: cover">
         <source class="active" src="./assets/earf.mp4" id="vid1" type="video/mp4">
-        <source class="inactive" src="./assets/earfR.mp4" id="vid2" type="video/mp4">
 
       </video>
     </div>
     
     
-    <div class="fixed top-0 h-screen w-full bg-blue-900" :class="screenState==1 ? 'screenanim' : 'screenanim3'" style="z-index: 1000"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
+    <div v-if="canAnimate==1" class="fixed top-0 h-screen w-full bg-blue-900" :class="screenState==1 ? 'screenanim' : 'screenanim3'" style="z-index: 1000"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
 
     </div>
-    <div class="fixed top-0 h-screen w-full screenanim2 bg-blue-600"  style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
+    <div v-if="canAnimate==1" class="fixed top-0 h-screen w-full screenanim2 bg-blue-600"  style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
 
     </div>
-    <div id="abt" class="fixed top-0 h-screen w-full bg-white " :class="screenState==1 ? 'screenanim3' : 'screenanim'" style="z-index: 1000" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
+    <div v-if="canAnimate==1" id="abt" class="fixed top-0 h-screen w-full bg-white " :class="screenState==1 ? 'screenanim3' : 'screenanim'" style="z-index: 1000" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : (screenState==1) ? '0px 0px 0px 0px' : '0px 0px '+ (windowHeight+5)+ 'px 0px', }">
       <About />
       
 
     </div>
 
     
-    <div class="fixed top-0 h-screen w-full bg-blue-600" :class="screenState==2 ? 'screenanim' : 'screenanim3'" style="z-index: 1000"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+    <div v-if="canAnimate==1" class="fixed top-0 h-screen w-full bg-blue-600" :class="screenState==2 ? 'screenanim' : 'screenanim3'" style="z-index: 1000"  :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
 
     </div>
-    <div class="fixed top-0 h-screen w-full screenanim2 bg-blue-900"  style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+    <div v-if="canAnimate==1" class="fixed top-0 h-screen w-full screenanim2 bg-blue-900"  style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ? '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
 
     </div>
-    <div id="resum" class="fixed top-0 h-screen w-full bg-white " :class="screenState==2 ? 'screenanim3' : 'screenanim'" style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ?  '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
+    <div v-if="canAnimate==1" id="resum" class="fixed top-0 h-screen w-full bg-white " :class="screenState==2 ? 'screenanim3' : 'screenanim'" style="z-index: 1000;" :style="{margin: (screenState==0) ? (windowHeight+5) + 'px 0px 0px 0px' : ((screenState==2) ?  '0px 0px 0px 0px' : (windowHeight+5) + 'px 0px 0px 0px')}">
       <Resume style="position: absolute" :style="{top: (-1*Math.round((this.scrollDist-3)*windowHeight)) + 'px'}" />
       
 
@@ -207,25 +206,28 @@
         
         <div v-if="elemDisplaying!=-1" class="w-1/2 flex items-baseline justify-between text-white" style="z-index: 1000;">
         
-          <div v-for="(val,ind) in projects" :key="ind" v-show="elemDisplaying==ind" class="bg-black opacity-75 rounded-lg px-8 py-8">
-            <img v-bind:src="require('./assets/projectimages/' + val.images[0])" class="max-w-64 max-h-64 mx-auto" style="max-height: 25rem; max-width: 25rem" alt='no image'/>
+          <div v-for="(val,ind) in projects" :key="ind" v-show="elemDisplaying==ind" class="rounded-lg px-8 py-8" style="background: rgba(0,0,0,0.75)">
+            <img v-if="val.video==undefined" v-bind:src="require('./assets/projectimages/' + val.images[0])" class="max-w-64 max-h-64 mx-auto rounded-md" :class="val.images[0]=='ultrasound.gif' ? 'rounded-md' : ''" style="max-height: 25rem; max-width: 25rem" alt='no image'/>
+            <video v-else autoplay loop muted id="valVideo" class="max-w-64 max-h-64 mx-auto" style="max-height: 25rem; max-width: 25rem">
+              <source class="active rounded-md" v-bind:src="require('./assets/projectimages/' + val.video)" type="video/mp4">
 
+            </video>
             <TitleTypeVue :msg="[val.title]" :sDelay="500" :cDelay="5" />
-            <ul data-aos="fade-up"
+            <ul   class="list-inside" style="list-style-position: inside">
+              <li data-aos="fade-left"
     data-aos-offset="200"
-    data-aos-delay="1000"
+    :data-aos-delay="800 + 200*ind2"
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="false"
-    data-aos-once="false"  class="list-inside" style="list-style-position: inside">
-              <li v-for="(desc, ind) in val.description" :key="ind" >{{desc}}</li>
+    data-aos-once="false" v-for="(desc, ind2) in val.description" :key="ind2" >{{desc}}</li>
             </ul>
             
           </div>
         </div>
         <div class="w-1/2 hidden lg:flex flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 5;">
 
-          <div id="mous" ref="mous" class="relative w-full h-full mx-auto" style="height:1000px; max-width: 1000px">
+          <div v-show="canAnimate==1" id="mous" ref="mous" class="relative w-full h-full mx-auto" style="height:1000px; max-width: 1000px">
             <!-- <p class="text-white">{{dots[0].x}} , {{dots[0].y}}</p> -->
             <!-- <p class="text-white">{{dots[1].y}} , {{dots[1].y}}</p> -->
             <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="px-4 py-1" :class="elemDisplaying==ind ? ['bg-gray-800', 'text-white'] : ['text-gray-400', 'hover:text-white']"
@@ -318,6 +320,7 @@ export default {
       offsetTop: 1000,
       offsetLeft: 1000,
       elemDisplaying: -1,
+      canAnimate: 0,
 
       mousee: false,
       lastpitch: 1/16,
@@ -622,8 +625,8 @@ export default {
     console.log("tim: ", (Math.round(this.scrollDist*100)/100), " John: " , (Math.round(window.scrollY*100)/100) , " bob: " , (Math.round(this.prevScroll*100)/100))
     console.log(projectsJSON)
     this.windowHeight = window.innerHeight
-    console.log(Object.keys(projectsJSON).length)
     window.scrollTo(0,0);
+    console.log(Object.keys(projectsJSON).length)
     var temp = {}
     var rando = {}
     document.addEventListener('scroll', this.handleScroll)
@@ -680,14 +683,17 @@ export default {
     }
     this.checkMaxRadius()
     setTimeout(() => this.rotate(), 30)
+    setTimeout(() => this.canAnimate=1, 10)
     setTimeout(() => this.sphereLoad = true, this.sphereLoadTime)
-    setTimeout(() => this.updateRadius() , 550)
+    setTimeout(() => this.updateRadius() , 500)
+    // this.updateRadius()
     setTimeout(() =>{
       this.height = document.getElementById('mous').clientHeight
       this.width = document.getElementById('mous').clientWidth
       this.offsetTop = document.getElementById('mous').offsetTop
       this.offsetLeft = document.getElementById('mous').offsetLeft
     }, 50)
+
   },
   computed: {
 

@@ -127,7 +127,7 @@
                   <div class="w-full flex flex-col item-start">
                     <div class="flex items-baseline justify-between">
                       <p class="text-sm text-left"> <b>University of Florida</b></p>
-                      <p class="text-sm text-left">  August 2019 - Present</p>
+                      <p class="text-sm text-left">  August 2019 - May 2020</p>
 
                     </div>
                     <p class="text-sm text-left"> <i>Teaching Assistant (Discrete Structures)</i> </p>
@@ -143,7 +143,7 @@
                   <div class="w-full flex flex-col item-start">
                     <div class="flex items-baseline justify-between">
                       <p class="text-sm text-left"> <b>University of Florida</b></p>
-                      <p class="text-sm text-left">  August 2019 - Present</p>
+                      <p class="text-sm text-left">  March 2019 - August 2019 </p>
 
                     </div>
                     <p class="text-sm text-left"> <i>Research Assistant</i> </p>
