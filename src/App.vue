@@ -201,14 +201,19 @@
     <div class="fixed top-0 h-screen w-full flex flex-col " style="z-index: 100" >
       
     <div class="h-screen w-full " style="z-index: 0">
-      <div class="w-full flex h-screen justify-end items-center relative">
+      <div class="w-full flex h-screen justify-start lg:justify-end items-center relative">
         
         
-        <div v-if="elemDisplaying!=-1" class="w-1/2 flex items-baseline justify-between text-white" style="z-index: 1000;">
+        <div v-if="elemDisplaying!=-1" class="w-1/4 lg:w-1/2 flex items-baseline justify-between text-white" style="z-index: 1000;">
         
-          <div v-for="(val,ind) in projects" :key="ind" v-show="elemDisplaying==ind" class="rounded-lg px-8 py-8" style="background: rgba(0,0,0,0.75)">
-            <img v-if="val.video==undefined" v-bind:src="require('./assets/projectimages/' + val.images[0])" class="max-w-64 max-h-64 mx-auto rounded-md" :class="val.images[0]=='ultrasound.gif' ? 'rounded-md' : ''" style="max-height: 25rem; max-width: 25rem" alt='no image'/>
-            <video v-else autoplay loop muted id="valVideo" class="max-w-64 max-h-64 mx-auto" style="max-height: 25rem; max-width: 25rem">
+          <div v-for="(val,ind) in projects" :key="ind+54" v-show="elemDisplaying==ind" class="rounded-lg px-2 py-2 md:px-8 md:py-8" style="background: rgba(0,0,0,0.75); min-width: 16rem">
+            <img v-if="val.video==undefined" v-bind:src="require('./assets/projectimages/' + val.images[0])" class="hidden md:block md:max-w-64 md:max-h-64 lg:mx-auto rounded-md" :class="val.images[0]=='ultrasound.gif' ? 'rounded-md' : ''" style="max-height: 25rem; max-width: 25rem" alt='no image'/>
+            <img v-if="val.video==undefined" v-bind:src="require('./assets/projectimages/' + val.images[0])" class="block md:hidden lg:mx-auto rounded-md mx-auto" :class="val.images[0]=='ultrasound.gif' ? 'rounded-md' : ''" style="max-height: 15rem; max-width: 15rem;" alt='no image'/>
+            <video v-else autoplay loop muted id="valVideo" class="md:block hidden md:max-w-64 md:max-h-64 mx-auto" style="max-height: 25rem; max-width: 25rem">
+              <source class="active rounded-md" v-bind:src="require('./assets/projectimages/' + val.video)" type="video/mp4">
+
+            </video>
+            <video v-if="val.video!=undefined" autoplay loop muted id="valVideo" class="block md:hidden md:max-w-64 md:max-h-64 mx-auto" style="max-height: 15rem; max-width: 15rem">
               <source class="active rounded-md" v-bind:src="require('./assets/projectimages/' + val.video)" type="video/mp4">
 
             </video>
@@ -220,7 +225,7 @@
     data-aos-duration="600"
     data-aos-easing="ease-in-out"
     data-aos-mirror="false"
-    data-aos-once="false" v-for="(desc, ind2) in val.description" :key="ind2" >{{desc}}</li>
+    data-aos-once="false" v-for="(desc, ind2) in val.description" class="text-sm md:text-base" :key="ind2" >{{desc}}</li>
             </ul>
             
           </div>
@@ -230,7 +235,7 @@
           <div v-show="canAnimate==1" id="mous" ref="mous" class="relative w-full h-full mx-auto" style="height:1000px; max-width: 1000px">
             <!-- <p class="text-white">{{dots[0].x}} , {{dots[0].y}}</p> -->
             <!-- <p class="text-white">{{dots[1].y}} , {{dots[1].y}}</p> -->
-            <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="px-4 py-1" :class="elemDisplaying==ind ? ['bg-gray-800', 'text-white'] : ['text-gray-400', 'hover:text-white']"
+            <div v-for="(val, ind) in dots.slice(2,dots.length)" :key="ind+24" @click="displayElem(ind)" style="border-radius: 5px; position: absolute" class="px-4 py-1" :class="elemDisplaying==ind ? ['bg-gray-800', 'text-white'] : ['text-gray-400', 'hover:text-white']"
             :style="{top: val.y + 'px', left: val.x + 'px' ,'z-index': Math.round((val.z+1)*40), transform: 'scale(' + (3*val.z/4+1) + ')'}">
               
               <p v-if="projects[ind].images" class="spheretext text-2xl font-medium"  style="cursor: pointer;" :class="elemDisplaying==ind ? [''] : ''">{{val.name}}</p>
@@ -244,10 +249,10 @@
           </div>
 
         </div>
-        <div class="w-1/4 flex lg:hidden flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 5;">
+        <div class="w-1/4 flex ml-auto lg:hidden flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 5;">
 
-          <div id="test" class="lg:hidden flex h-full mx-auto flex-col items-center w-full z-10">
-            <div v-for="(val,ind) in dots.slice(2,dots.length)" :key="ind" @click="displayElem(ind)" class="ml-auto flex items-center">
+          <div id="test" class="lg:hidden flex h-full mx-auto flex-col items-start md:items-center w-full z-10">
+            <div v-for="(val,ind) in dots.slice(2,dots.length)" :key="ind+99" @click="displayElem(ind)" class="md:ml-auto flex items-center">
                 <p class="text-md text-white font-medium cursor-pointer my-2 px-2">{{val.name}}</p>
             </div>
           </div>

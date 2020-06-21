@@ -65,9 +65,9 @@
                   </div>
                   <div class="w-1/2 flex flex-col item-start">
                     <p class="text-sm text-right">Graduated: May 2020</p>
-                    <p class="text-sm text-right">Major GPA:  3.83/4.0</p>
-                    <p class="text-sm text-right">Minor GPA:  3.95/4.0	</p>
-                    <p class="text-sm text-right">Cumulative GPA:  3.7/4.0	</p>
+                    <p class="text-sm text-right">Major GPA: <b>3.83</b> /4.0</p>
+                    <p class="text-sm text-right">Minor GPA: <b>3.95</b> /4.0	</p>
+                    <p class="text-sm text-right">Cumulative GPA: <b>3.7</b> /4.0	</p>
                     
 
                   </div>
@@ -77,8 +77,8 @@
 
               <div class="flex items-center ">
                 <div class="text-white rounded-md flex justify-between items-center mb-2 w-full">
-                  <p class="px-3 rounded-full text-sm font-medium border border-blue-900 cursor-pointer mx-2" @click="filterMethods(-1)" :class="filter==-1 ? ['bg-blue-900', 'text-white', 'hover:bg-blue-800'] : ['text-blue-900','text-white', 'hover:bg-blue-900', 'hover:text-white']">All</p>
-                  <p v-for="(course, ind) in coursesKey" :key="ind" @click="filterMethods(ind)" class="bg-white border border-blue-900   cursor-pointer font-medium px-3 rounded-full text-sm " 
+                  <p class="px-3 rounded-full text-sm font-medium border border-blue-900 cursor-pointer md:mx-2" @click="filterMethods(-1)" :class="filter==-1 ? ['bg-blue-900', 'text-white', 'hover:bg-blue-800'] : ['text-blue-900','text-white', 'hover:bg-blue-900', 'hover:text-white']">All</p>
+                  <p v-for="(course, ind) in coursesKey" :key="ind" @click="filterMethods(ind)" class="border border-blue-900  hidden md:block cursor-pointer font-medium px-1 md:px-3 rounded-full text-xs md:text-sm " 
                   :class="filter==ind ? ['bg-blue-900', 'text-white', 'hover:bg-blue-800'] : ['text-blue-900','text-white', 'hover:bg-blue-900', 'hover:text-white']">{{course}}</p>
                 </div>
               </div>
@@ -224,27 +224,27 @@
               </div>
               <div class="flex flex w-full justify-center items-start mt-1">
                   <div class="w-3/4 flex flex-col item-start">
-                    <p class="text-xs text-left">UNIVERSITY OF FLORIDA, GAINESVILLE, FL</p>
-                    <p class="text-xs text-left">Bachelor of Science in Computer Science</p>
-                    <p class="text-xs text-left">Completed Minor in Mathematics	</p>
+                    <p class="text-xs text-left">University of Florida</p>
+                    <p class="text-xs text-left">BS in Computer Science</p>
+                    <p class="text-xs text-left">Minor in Mathematics	</p>
                     
 
                   </div>
                   <div class="w-1/2 flex flex-col item-start">
                     <p class="text-xs text-right">Graduated: May 2020</p>
-                    <p class="text-xs text-right">Major GPA:  3.83/4.0</p>
-                    <p class="text-xs text-right">Minor GPA:  3.95/4.0	</p>
-                    <p class="text-xs text-right">Cumulative GPA:  3.7/4.0	</p>
+                    <p class="text-xs text-right">Major GPA:  <b>3.83</b> /4.0</p>
+                    <p class="text-xs text-right">Minor GPA: <b>3.95</b> /4.0	</p>
+                    <p class="text-xs text-right">Cumulative GPA: <b>3.7</b> /4.0	</p>
                     
 
                   </div>
                   
               </div>
-              <p class="text-xs uppercase font-bold text-blue-900 mt-2 mb-2">Filter</p>
+              <p class="text-xs uppercase font-bold text-blue-900 mb-2">Filter</p>
 
               <div class="flex items-center ">
                 <div class="text-white rounded-md flex justify-between items-center mb-2 w-full">
-                  <p class="px-3 rounded-full text-xs font-medium border border-blue-900 cursor-pointer mx-2"  style="font-size: 0.5rem" @click="filterMethods(-1)" :class="filter==-1 ? ['bg-blue-900', 'text-white', 'hover:bg-blue-800'] : ['text-blue-900','text-white', 'hover:bg-blue-900', 'hover:text-white']">All</p>
+                  <p class="px-3 rounded-full text-xs font-medium border border-blue-900 cursor-pointer md:mx-2"  style="font-size: 0.5rem" @click="filterMethods(-1)" :class="filter==-1 ? ['bg-blue-900', 'text-white', 'hover:bg-blue-800'] : ['text-blue-900','text-white', 'hover:bg-blue-900', 'hover:text-white']">All</p>
                   <p v-for="(course, ind) in coursesKey" :key="ind" @click="filterMethods(ind)" class="bg-white border border-blue-900   cursor-pointer font-medium px-3 rounded-full" 
                   style="font-size: 0.5rem" :class="filter==ind ? ['bg-blue-900', 'text-white', 'hover:bg-blue-800'] : ['text-blue-900','text-white', 'hover:bg-blue-900', 'hover:text-white']">{{course}}</p>
                 </div>
