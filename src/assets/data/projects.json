@@ -23,7 +23,7 @@
     "realAppeal":{
         "titleL": "Startup - Event Discovery Platform",
         "tags":["Frontend Development", "Backend Development"],
-        "description": [ "Visit www.real-appeal.com","In collaboration with students from the UCLA Masters in Business Admnistration program, I created the front and back end of their website.", "The site provides customers an animated application process that pushes their form data to a NoSQL cloud firestore database."],
+        "description": [ "Visit www.real-appeal.com","In collaboration with students from the UCLA Masters in Business Administration program, I created the front and back end of their website.", "The site provides customers an animated application process that pushes their form data to a NoSQL cloud firestore database."],
         "images": ["realAppeal.gif"],
         "link" : ""
     },
@@ -35,9 +35,9 @@
         "link" : ""
     },
     "WebcamML":{
-        "titleL": "Realtime Hand Recognition System",
+        "titleL": "Real-time Hand Recognition System",
         "tags":["Frontend Development", "Backend Development", "Machine Learning", "Data Science"],
-        "description":["webcamML.chrisdizenzo.com","A website to collect data for labeled hand images.", "Data pipelining and manipulation to increase robustness", "Created realtime hand recognition system using YOLOv3 architecture."],
+        "description":["webcamML.chrisdizenzo.com","A website to collect data for labeled hand images.", "Data pipelining and manipulation to increase robustness", "Created real-time hand recognition system using YOLOv3 architecture."],
         "images": ["webcamMLFixed.png"],
         "video" : "handML.mp4",
         "link" : ""
@@ -66,8 +66,29 @@
     "KartingML":{
         "titleL": "Machine Learning to drive around a racetrack in Unity",
         "tags":["Machine Learning"],
-        "description":["Applied autodynamics from GatorMotorsports to create a drivable racecar in Unity.", "Using raycasting, the computer could see the track, and could control the accelaration and turning angle.","Used a genetic algorithm package (ML-Agents) to teach a computer to drive around a racetrack."],
+        "description":["Applied autodynamics from GatorMotorsports to create a drivable racecar in Unity.", "Using raycasting, the computer could see the track, and could control the acceleration and turning angle.","Used a genetic algorithm package (ML-Agents) to teach a computer to drive around a racetrack."],
         "images": ["machineKarting.gif"],
+        "link" : ""
+    },
+    "Hackintosh":{
+        "titleL": "For educational purposes I build a computer to boot MacOS",
+        "tags":["Operating Systems"],
+        "description":["Researched components compatible with MacOS and built the computer that now runs MacOS Catalina 10.15.5.", "Learned the MacOS boot sequence and MacOS kernel to significant detail to successfully run the latest version of MacOS.","This computer was built for educational purposes and was never used for App Development."],
+        "images": ["hacintosh.jpg"],
+        "link" : ""
+    },
+    "ChatApp":{
+        "titleL": "Chatter",
+        "tags":["Networking", "Backend Development"],
+        "description":["Built a computer running Ubuntu Server 20.04 LTS hosted on my local home internet that services a live websocket connection through port-forwarding and a reverse proxy using NGINX.", "Server backend was written in Java, with IntelliJ IDE, and utilized Maven project manager to host a Jetty server to live update chats across all users."],
+        "images": ["javaSocket.png"],
+        "link" : ""
+    },
+    "FoundATime":{
+        "titleL": "Chatter",
+        "tags":["Networking", "Backend Development"],
+        "description":["Utilizing the Ubuntu Server from ChatApp, created a Node.js back-end and designed the UI/UX that allowed users to create events, share their availability, and chat.","Back-end was developed with Node.js, socket.io, and ExpressJS. Front-end was developed with Vue, TailwindCSS, HTML/CSS"],
+        "images": ["FoundATime.png"],
         "link" : ""
     }
 }

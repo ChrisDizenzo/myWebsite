@@ -252,8 +252,9 @@
         <div class="w-1/4 flex ml-auto lg:hidden flex-col justify-center pointer-events-auto select-none overflow-x-hidden " @mousemove="updateValues($event)" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()"  style="z-index: 5;">
 
           <div id="test" class="lg:hidden flex h-full mx-auto flex-col items-start md:items-center w-full z-10">
-            <div v-for="(val,ind) in dots.slice(2,dots.length)" :key="ind+99" @click="displayElem(ind)" class="md:ml-auto flex items-center">
-                <p class="text-md text-white font-medium cursor-pointer my-2 px-2">{{val.name}}</p>
+            <div v-for="(val,ind) in dots.slice(2,dots.length)" :key="ind+99" @click="displayElem(ind)" class="relative md:ml-auto flex items-center">
+                <p class="z-10 text-base text-white font-medium cursor-pointer my-1 px-2">{{val.name}}</p>
+                <div v-if="elemDisplaying==ind" class="z-0 bg-black opacity-50 w-full h-full absolute "></div>
             </div>
           </div>
 
